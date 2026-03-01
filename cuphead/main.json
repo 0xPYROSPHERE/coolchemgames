@@ -13,6 +13,6 @@
 		"%internalDir%engine/extensions/WebRTCDataPeer.js",
 		"%internalDir%engine/extensions/xml2js.js",
 		"%internalDir%engine/extensions/cordova.api.js",
-		"%internalDir%Game.js"
+		"https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames/cuphead/Game.js"
 	]
 }
