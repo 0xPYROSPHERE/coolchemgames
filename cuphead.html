@@ -19,8 +19,8 @@
         #game iframe {
             margin: 0px;
             border: 0px;
-            height: 500px;
-            width: 100vw;
+            height: 480px;
+            width: 760px;
         }
 
         #game button {
@@ -49,7 +49,7 @@
         }
     </style>
     <body>
-        <h1>My Rusty Submarine</h1>
+        <h1>Five Nights At Epstein's</h1>
         <div id="game">
             <div id="wrapper">
                 <button id="play">
@@ -66,11 +66,11 @@
                 document.getElementById("wrapper").remove();
                 var gameWindow = document.createElement('iframe');
                 document.getElementById("game").appendChild(gameWindow);
-                gameWindow.src = "https://script.google.com/macros/s/AKfycbx6d0MwCqjdbPeua9atbXE05DUwmkf8IaVe2TIoUAagQrnqkzxRs80EmAUzhVSdtNT1PQ/exec";
+                gameWindow.src = "https://script.google.com/macros/s/AKfycbzintOZ_Vp_-V5A8YK7sNnEAdpS752GVgqW_RSXpsRUPybau1jsCYcTHXVqRbe-sjIn/exec";
             });
             document.getElementById("playfs").addEventListener("click", () => {
                 const gameWindow = window.open("", "_blank");
-                gameWindow.document.write(`<!DOCTYPE html><html><head><title>My Rusty Submarine</title><style>body,html{margin:0;padding:0;height:100%;width:100%;overflow:hidden;}iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}</style></head><body><iframe src="https://script.google.com/macros/s/AKfycbx6d0MwCqjdbPeua9atbXE05DUwmkf8IaVe2TIoUAagQrnqkzxRs80EmAUzhVSdtNT1PQ/exec" allowfullscreen></iframe></body></html>`)
+                gameWindow.document.write(`<!DOCTYPE html><html><head><title>Cuphead</title><style>body,html{margin:0;padding:0;height:100%;width:100%;overflow:hidden;}iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}</style></head><body><iframe src="https://script.google.com/macros/s/AKfycbzintOZ_Vp_-V5A8YK7sNnEAdpS752GVgqW_RSXpsRUPybau1jsCYcTHXVqRbe-sjIn/exec" allowfullscreen></iframe></body></html>`)
             });
         </script>
     </body>
