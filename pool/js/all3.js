@@ -3992,8 +3992,10 @@ function() {
             i = "AAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg==",
             s = new Image;
         s.src = t + "AP804Oa6" + i;
+        s.crossOrigin = "anonymous";
         var n = new Image;
         n.src = t + "/wCKxvRF" + i;
+        n.crossOrigin = "anonymous";
         var o = e.CanvasPool.create(this, 6, 1).getContext("2d");
         if (o.globalCompositeOperation = "multiply", o.drawImage(s, 0, 0), o.drawImage(n, 2, 0), !o.getImageData(2, 0, 1, 1)) return !1;
         var r = o.getImageData(2, 0, 1, 1).data;
@@ -4607,6 +4609,7 @@ function() {
         }
     }, e.RenderTexture.prototype.getImage = function() {
         var t = new Image;
+        t.crossOrigin = "anonymous";
         return t.src = this.getBase64(), t
     }, e.RenderTexture.prototype.getBase64 = function() {
         return this.getCanvas().toDataURL()
@@ -8986,6 +8989,7 @@ function() {
             },
             generateTexture: function(t) {
                 var e = new Image;
+                e.crossOrigin = "anonymous";
                 e.src = this.canvas.toDataURL("image/png");
                 var i = this.game.cache.addImage(t, "", e);
                 return new PIXI.Texture(i.base)
