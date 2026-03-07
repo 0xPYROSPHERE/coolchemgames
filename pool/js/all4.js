@@ -12035,7 +12035,7 @@ function() {
                 bitmapFont: {},
                 shader: {},
                 renderTexture: {}
-            }, this._urlMap = {}, this._urlResolver = new Image, this._urlTemp = null, this.onSoundUnlock = new i.Signal, this._cacheMap = [], this._cacheMap[i.Cache.CANVAS] = this._cache.canvas, this._cacheMap[i.Cache.IMAGE] = this._cache.image, this._cacheMap[i.Cache.TEXTURE] = this._cache.texture, this._cacheMap[i.Cache.SOUND] = this._cache.sound, this._cacheMap[i.Cache.TEXT] = this._cache.text, this._cacheMap[i.Cache.PHYSICS] = this._cache.physics, this._cacheMap[i.Cache.TILEMAP] = this._cache.tilemap, this._cacheMap[i.Cache.BINARY] = this._cache.binary, this._cacheMap[i.Cache.BITMAPDATA] = this._cache.bitmapData, this._cacheMap[i.Cache.BITMAPFONT] = this._cache.bitmapFont, this._cacheMap[i.Cache.JSON] = this._cache.json, this._cacheMap[i.Cache.XML] = this._cache.xml, this._cacheMap[i.Cache.VIDEO] = this._cache.video, this._cacheMap[i.Cache.SHADER] = this._cache.shader, this._cacheMap[i.Cache.RENDER_TEXTURE] = this._cache.renderTexture, this.addDefaultImage(), this.addMissingImage()
+            }, this._urlMap = {}, this._urlResolver = new Image, this._urlResolver.crossOrigin = "anonymous", this._urlTemp = null, this.onSoundUnlock = new i.Signal, this._cacheMap = [], this._cacheMap[i.Cache.CANVAS] = this._cache.canvas, this._cacheMap[i.Cache.IMAGE] = this._cache.image, this._cacheMap[i.Cache.TEXTURE] = this._cache.texture, this._cacheMap[i.Cache.SOUND] = this._cache.sound, this._cacheMap[i.Cache.TEXT] = this._cache.text, this._cacheMap[i.Cache.PHYSICS] = this._cache.physics, this._cacheMap[i.Cache.TILEMAP] = this._cache.tilemap, this._cacheMap[i.Cache.BINARY] = this._cache.binary, this._cacheMap[i.Cache.BITMAPDATA] = this._cache.bitmapData, this._cacheMap[i.Cache.BITMAPFONT] = this._cache.bitmapFont, this._cacheMap[i.Cache.JSON] = this._cache.json, this._cacheMap[i.Cache.XML] = this._cache.xml, this._cacheMap[i.Cache.VIDEO] = this._cache.video, this._cacheMap[i.Cache.SHADER] = this._cache.shader, this._cacheMap[i.Cache.RENDER_TEXTURE] = this._cache.renderTexture, this.addDefaultImage(), this.addMissingImage()
         }, i.Cache.CANVAS = 1, i.Cache.IMAGE = 2, i.Cache.TEXTURE = 3, i.Cache.SOUND = 4, i.Cache.TEXT = 5, i.Cache.PHYSICS = 6, i.Cache.TILEMAP = 7, i.Cache.BINARY = 8, i.Cache.BITMAPDATA = 9, i.Cache.BITMAPFONT = 10, i.Cache.JSON = 11, i.Cache.XML = 12, i.Cache.VIDEO = 13, i.Cache.SHADER = 14, i.Cache.RENDER_TEXTURE = 15, i.Cache.DEFAULT = null, i.Cache.MISSING = null, i.Cache.prototype = {
             addCanvas: function(t, e, i) {
                 void 0 === i && (i = e.getContext("2d")), this._cache.canvas[t] = {
@@ -12057,12 +12057,14 @@ function() {
             },
             addDefaultImage: function() {
                 var t = new Image;
+                t.crossOrigin = "anonymous";
                 t.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABVJREFUeF7NwIEAAAAAgKD9qdeocAMAoAABm3DkcAAAAABJRU5ErkJggg==";
                 var e = this.addImage("__default", null, t);
                 e.base.skipRender = !0, i.Cache.DEFAULT = new PIXI.Texture(e.base)
             },
             addMissingImage: function() {
                 var t = new Image;
+                t.crossOrigin = "anonymous";
                 t.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJ9JREFUeNq01ssOwyAMRFG46v//Mt1ESmgh+DFmE2GPOBARKb2NVjo+17PXLD8a1+pl5+A+wSgFygymWYHBb0FtsKhJDdZlncG2IzJ4ayoMDv20wTmSMzClEgbWYNTAkQ0Z+OJ+A/eWnAaR9+oxCF4Os0H8htsMUp+pwcgBBiMNnAwF8GqIgL2hAzaGFFgZauDPKABmowZ4GL369/0rwACp2yA/ttmvsQAAAABJRU5ErkJggg==";
                 var e = this.addImage("__missing", null, t);
                 i.Cache.MISSING = new PIXI.Texture(e.base)
@@ -12799,7 +12801,7 @@ function() {
             },
             loadImageTag: function(t) {
                 var e = this;
-                t.data = new Image, t.data.name = t.key, this.crossOrigin && (t.data.crossOrigin = this.crossOrigin), t.data.onload = function() {
+                t.data = new Image, t.data.crossOrigin = "anonymous", t.data.name = t.key, this.crossOrigin && (t.data.crossOrigin = this.crossOrigin), t.data.onload = function() {
                     t.data.onload && (t.data.onload = null, t.data.onerror = null, e.fileComplete(t))
                 }, t.data.onerror = function() {
                     t.data.onload && (t.data.onload = null, t.data.onerror = null, e.fileError(t))
