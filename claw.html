@@ -139,24 +139,29 @@
                 loadEmulator(romFile.files[0].name);
             })
 
-            function loadEmulator(romName) {
-                romExtension = romName.slice(romName.indexOf(".") + 1, romName.length);
-                EJS_gameName = romName.slice(0, romName.indexOf("."));
-                if (ROM_EXTS[romExtension] != "generic") {
-                    EJS_core = ROM_EXTS[romExtension];
-                } else {
-                    document.getElementById("system-select").style.display = "block";
-                    document.getElementById("system-select").addEventListener("change", () => {
-                        EJS_core = document.getElementById("system-select").value;
-                        
-                    })
-                }
+            function createPlayButton() {
                 const playButton = document.createElement("button");
                 const playIcon = document.createElement('img');
                 playIcon.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/fsbutton.png";
                 playButton.append(playIcon);
                 document.getElementById("wrapper").append(playButton);
                 playButton.addEventListener("click", () => {beginLoading();})
+            }
+
+            function loadEmulator(romName) {
+                romExtension = romName.slice(romName.indexOf(".") + 1, romName.length);
+                EJS_gameName = romName.slice(0, romName.indexOf("."));
+                if (ROM_EXTS[romExtension] != "generic") {
+                    EJS_core = ROM_EXTS[romExtension];
+                    createPlayButton();
+                } else {
+                    document.getElementById("system-select").style.display = "block";
+                    document.getElementById("system-select").addEventListener("change", () => {
+                        EJS_core = document.getElementById("system-select").value;
+                        createPlayButton();
+                    })
+                }
+
             }
 
             romSelect = document.getElementById("rom-select");

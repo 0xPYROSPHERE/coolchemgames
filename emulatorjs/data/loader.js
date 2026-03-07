@@ -4,7 +4,7 @@ const folderPath = (path) => {
 };
 let scriptPath = (typeof window.EJS_pathtodata === "string") ? window.EJS_pathtodata : folderPath((new URL(document.currentScript.src)).pathname);
 if (!scriptPath.endsWith("/")) scriptPath += "/";
-if (!scriptPath.startsWith("/")) scriptPath = "../" + scriptPath;
+//if (!scriptPath.startsWith("/")) scriptPath = "../" + scriptPath;
 
 const debug = window.EJS_DEBUG_XX === true;
 
