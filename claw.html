@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="zip.min.js"></script>
+    <style>
+        body {
+            background-color: #36344e;
+            margin: 0px;
+        }
+
+        #game {
+            height: 500px;
+            width: 100vw;
+            background-color: gray;
+            text-align: center;
+        }
+
+        #game iframe {
+            margin: 0px;
+            border: 0px;
+            height: 500px;
+            width: 50vw;
+        }
+
+        #game select, #game input::file-selector-button {
+            display: inline;
+            margin: 0px 25px;
+        }
+
+        #wrapper {
+            display: block;
+            padding: 60px 0px;
+            font-family: "Merriweather Sans";
+            font-size: 36px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        #wrapper button {
+            margin: 0px 30px;
+        }
+
+        #rom-select, #system-select {
+            font-family: "Merriweather Sans";
+            font-size: 30px;
+            text-align: center;
+        }
+
+        #rom-file {
+            font-family: "Merriweather Sans";
+            font-size: 36px;
+            width: 500px;
+        }
+
+        #rom-file::file-selector-button {
+            font-family: "Merriweather Sans";
+            font-size: 30px;
+        }
+
+        #game img {
+            height: 100px;
+            width: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 60px;
+            color: yellow;
+            font-family: 'Sigmar';
+            font-weight: 400;
+        }
+    </style>
+    <body>
+        <div id="game">
+            <div id="wrapper">
+                <select name="ROM" id="rom-select">
+                    <option disabled selected value>Select Game</option>
+                    <option value="aa">Call of Duty: Black Ops</option>
+                </select>
+                or
+                <input type="file" id="rom-file">
+                <br>
+                <select name="System" id="system-select">
+                <option disabled selected value>Select system</option>
+                <option value="psx">Playstation</option>
+                <option value="jaguar">Atari Jaguar</option>
+                <option value="snes">SNES</option>
+                <option value="n64">Nintendo 64</option>
+                <option value="nes">NES</option>
+                <option value="lynx">Atari Lynx</option>
+                <option value="segaSaturn">Sega Saturn</option>
+                <option value="segaMS">Master System</option>
+                <option value="segaMD">Sega Genesis</option>
+                <option value="atari2600">Atari 2600</option>
+                <option value="gb">Game Boy</option>
+                <option value="gba">Game Boy Advance</option>
+                <option value="nds">Nintendo DS</option>
+                <option value="pce">TurboGrafx-16</option>
+                <option value="c64">Commodore 64</option> 
+            </select>
+        </div>
+                <script>
+
+            EJS_color = "#0064ff";
+            EJS_startOnLoaded = true;
+            EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+            EJS_core = ""
+
+            ROM_EXTS = {
+                "sfc": "snes",
+                "smc": "snes",
+                "7z": "generic",
+                "zip": "generic",
+                "n64": "n64",
+                "z64": "n64",
+                "v64": "n64",
+                "nes": "nes",
+                "j64": "jaguar",
+                "jag": "jaguar",
+                "bin": "generic",
+                "iso": "generic",
+                "lnx": "lynx",
+                "sms": "segaMS",
+                "md": "segaMD",
+                "a26": "atari2600",
+                "gb": "gb",
+                "gba": "gba",
+                "nds": "nds",
+                "pce": "pce",
+                "d64": "c64",
+                "g64": "c64",
+                "t64": "c64",
+                "chd": "generic"
+            }
+
+            romFile = document.getElementById("rom-file");
+            romFile.addEventListener("input", () => {
+                EJS_gameUrl = romFile.files[0];
+                loadEmulator(romFile.files[0].name);
+            })
+
+            function loadEmulator(romName) {
+                romExtension = romName.slice(romName.indexOf(".") + 1, romName.length);
+                EJS_gameName = romName.slice(0, romName.indexOf("."));
+                if (ROM_EXTS[romExtension] != "generic") {
+                    EJS_core = ROM_EXTS[romExtension];
+                    beginLoading();
+                } else {
+                    document.getElementById("system-select").style.display = "block";
+                    document.getElementById("system-select").addEventListener("change", () => {
+                        EJS_core = document.getElementById("system-select").value;
+                        beginLoading();
+                    })
+                }
+            }
+
+            romSelect = document.getElementById("rom-select");
+            romSelect.addEventListener("change", () => {
+                const romData = fetch("claw/files.json").then((response) => {return response.json()});
+                var romChunks = [];
+                for (i=0; i<romData.chunks; i++) {
+                    romChunks.push(fetch(`claw/${romSelect.value}/${romSelect.value}.zip.${i}`).then)
+                }
+                loadEmulator(romSelect.value);
+            })
+
+            function beginLoading() {
+                document.getElementById("rom-selection").remove();
+                const gameWindow = window.open("", "_blank");
+                gameWindow.document.write(`
+                    <!DOCTYPE html>
+                        <html>
+                            <head>
+                                <title>${EJS_gameName}</title>
+                                <style>
+                                    body, html {
+                                        margin:0;
+                                        padding:0;
+                                        height:100%;
+                                        width:100%;
+                                        overflow:hidden;
+                                    }
+
+                                    #ejs-game {
+                                        position:absolute;
+                                        top:0;
+                                        left:0;
+                                        width:100%;
+                                        height:100%;
+                                        border:none;
+                                    }
+                                </style>
+                                <script>
+                                    window.gameData = []
+                                    EJS_player = "#ejs-game";
+                                <\/script>
+                            </head>
+                            <body>
+                                <div id="ejs-game"></div>
+                            </body>
+                        </html>
+                `)
+                loader();
+            }
+        </script>
+    </body>
+</html>
