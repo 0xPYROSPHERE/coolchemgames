@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Eaglercraft 1.12.2</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #import-save {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        #export-save {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe srcdoc='${content}' id="game" allowfullscreen></iframe>
+    <button id="import-save">Import Save</button>
+    <button id="export-save">Export Save</button>
+    <script>
+        const importButton = document.getElementById("import-save");
+        const exportButton = document.getElementById("export-save");
+        const gameFrame = document.getElementById("game");
+        gameFrame.addEventListener('focus', () => {
+            importButton.style.display = "none";
+            exportButton.style.display = "none";
+        });
+        gameFrame.addEventListener('blur', () => {
+            importButton.style.display = "fixed";
+            exportButton.style.display = "fixed";
+        });
+        function importSave() {
+            
+        }
+        function exportSave() {
+            var saveData = {
+                local: {},
+                idb: []
+            }
+            saveData['local']['_eaglercraft_1.12.g'] = localStorage.getItem('_eaglercraft_1.12.g');
+            saveData['local']['_eaglercraft_1.12.p'] = localStorage.getItem('_eaglercraft_1.12.p');
+            var openDBRequest = window.indexedDB.open("_net_lax1dude_eaglercraft_v1_8_internal_PlatformFilesystem_1_12_2_");
+            var saveDB;
+            openDBRequest.onsuccess = (e) => {
+                saveDB = openDBRequest.result;
+                var getAllTransaction = saveDB.transaction("filesystem").objectStore("filesystem").getAll()
+                getAllTransaction.onsuccess = (e) => {
+                    saveData.idb = getAllTransaction.result;
+                }
+            }
+            const saveUrl = URL.createObjectURL(new Blob(JSON.stringify(saveData)))
+            var saveLink = document.createElement("a");
+            saveLink.src = saveUrl;
+            saveLink.download = "Save.json";
+            document.body.appendChild(saveLink);
+            saveLink.click();
+            document.body.removeChild(saveLink);
+            URL.revokeObjectURL(saveUrl);
+        }
+
+        importButton.addEventListener("click", () => {
+            importSave();
+        })
+
+        exportButton.addEventListener("click", () => {
+            exportSave();
+        })
+    </script>
+</body>
+
+</html>
