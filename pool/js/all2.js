@@ -4012,7 +4012,8 @@ function() {
                     parent: t,
                     canvas: document.createElement("canvas")
                 };
-                e.CanvasPool.pool.push(r), n = r.canvas
+                e.CanvasPool.pool.push(r), n = r.canvas;
+                n.crossOrigin = "anonymous";
             } else e.CanvasPool.pool[o].parent = t, n = e.CanvasPool.pool[o].canvas;
             return void 0 !== i && (n.width = i, n.height = s), n
         },
