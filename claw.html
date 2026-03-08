@@ -80,10 +80,10 @@
                 <select name="ROM" id="rom-select">
                     <option disabled selected value>Select Game</option>
                     <option disabled>--- Call of Duty ---</option>
-                    <option value="ab">Call of Duty: Modern Warfare (DS)</option>
-                    <option value="ac">Call of Duty: Modern Warfare 2 (DS)</option>
+                    <option value="af">Call of Duty: Modern Warfare (DS)</option>
+                    <option value="ag">Call of Duty: Modern Warfare 2 (DS)</option>
                     <option value="ad">Call of Duty: Modern Warfare 3 (DS)</option>
-                    <option value="ae">Call of Duty: World at War (DS)</option>
+                    <option value="ah">Call of Duty: World at War (DS)</option>
                     <option value="aa">Call of Duty: Black Ops (DS)</option>
                 </select>
                 or
@@ -107,6 +107,7 @@
                     <option value="pce">TurboGrafx-16</option>
                     <option value="c64">Commodore 64</option> 
                 </select>
+                <div style="display: none;" id="build-load-text">Building ROM...</div>
             </div>
         </div>
                 <script>
@@ -190,7 +191,7 @@
 
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/files.json?v=2")
+                fetch(baseUrl + "claw/index.json?v=2")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
@@ -198,6 +199,8 @@
             })
 
             async function buildRom(romData) {
+                var loadingText = document.getElementById("build-load-text");
+                loadingText.style.display = "inline";
                 var romChunks = new Uint8Array();
                 for (let i=0; i<romData.chunks; i++) {
                     await fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.zip.${i}?v=1`)
@@ -209,10 +212,10 @@
                             romChunks = romChunksExtend;  
                         })
                 }                  
-                console.log(romChunks.byteLength);
                 fileReader = new FileReader();
                 fileReader.readAsDataURL(new Blob([romChunks]));
                 fileReader.addEventListener("load", () => {
+                    loadingText.style.display = "none";
                     window.EJS_gameUrl = fileReader.result;
                     window.EJS_core = romData.system;
                     loadEmulator(romData.title);
@@ -255,7 +258,6 @@
                                     window.EJS_core = "${EJS_core}";
                                     window.EJS_gameUrl = "${EJS_gameUrl}";
                                     window.EJS_gameName = "${EJS_gameName}";
-                                    fetch(window.EJS_gameUrl).then((response) => {window.EJS_gameUrl = reponse.blob();})
                                 <\/script>
                             </head>
                             <body>
