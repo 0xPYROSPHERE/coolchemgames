@@ -3,5 +3,25 @@
         "title": "Call of Duty: Black Ops",
         "system": "nds",
         "chunks": 3
+    },
+    "ab": {
+        "title": "Call of Duty: Modern Warfare",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ac": {
+        "title": "Call of Duty: Modern Warfare: Mobilized",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ad": {
+        "title": "Call of Duty: Modern Warfare 3 - Defiance",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ae": {
+        "title": "Call of Duty: World at War",
+        "system": "nds",
+        "chunks": 3
     }
 }

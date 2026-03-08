@@ -79,7 +79,12 @@
             <div id="wrapper">
                 <select name="ROM" id="rom-select">
                     <option disabled selected value>Select Game</option>
-                    <option value="aa">Call of Duty: Black Ops</option>
+                    <option disabled>--- Call of Duty ---</option>
+                    <option value="ab">Call of Duty: Modern Warfare (DS)</option>
+                    <option value="ac">Call of Duty: Modern Warfare 2 (DS)</option>
+                    <option value="ad">Call of Duty: Modern Warfare 3 (DS)</option>
+                    <option value="ae">Call of Duty: World at War (DS)</option>
+                    <option value="aa">Call of Duty: Black Ops (DS)</option>
                 </select>
                 or
                 <input type="file" id="rom-file">
@@ -139,8 +144,11 @@
             window.EJS_core = "";
             romFile = document.getElementById("rom-file");
             romFile.addEventListener("input", () => {
-                window.EJS_gameUrl = URL.createObjectURL(romFile.files[0]);
-                loadEmulator(romFile.files[0].name);
+                fileReader.readAsDataURL(romFile.files[0]);
+                fileReader.addEventListener("load", () => {
+                    window.EJS_gameUrl = fileReader.result;
+                    loadEmulator(romFile.files[0].name);
+                })
             })
 
             function createPlayButton() {
@@ -166,7 +174,7 @@
                     window.EJS_core = ROM_EXTS[romExtension];                        
                     createPlayButton();
                 } else if (window.EJS_core == "") {
-                    document.getElementById("system-select").style.display = "block";
+                    document.getElementById("system-select").style.display = "inline";
                     document.getElementById("system-select").addEventListener("change", () => {
                         window.EJS_core = document.getElementById("system-select").value;
                         createPlayButton();
@@ -201,10 +209,13 @@
                         })
                 }                  
                 console.log(romChunks.byteLength);
-                window.EJS_gameUrl = URL.createObjectURL(new Blob([romChunks]));
-                window.EJS_core = romData.system;
-                console.log(romData);
-                loadEmulator(romData.title);
+                fileReader = new FileReader();
+                fileReader.readAsDataURL(new Blob([romChunks]));
+                fileReader.addEventListener("load", () => {
+                    window.EJS_gameUrl = fileReader.result;
+                    window.EJS_core = romData.system;
+                    loadEmulator(romData.title);
+                })
             }
 
             function beginLoading() {
