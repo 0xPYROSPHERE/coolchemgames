@@ -144,6 +144,7 @@
             window.EJS_core = "";
             romFile = document.getElementById("rom-file");
             romFile.addEventListener("input", () => {
+                fileReader = new FileReader();
                 fileReader.readAsDataURL(romFile.files[0]);
                 fileReader.addEventListener("load", () => {
                     window.EJS_gameUrl = fileReader.result;
@@ -189,7 +190,7 @@
 
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/files.json")
+                fetch(baseUrl + "claw/files.json?v=1")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
@@ -199,7 +200,7 @@
             async function buildRom(romData) {
                 var romChunks = new Uint8Array();
                 for (let i=0; i<romData.chunks; i++) {
-                    await fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.zip.${i}`)
+                    await fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.zip.${i}?v=1`)
                         .then((response) => {return response.bytes();})
                         .then((chunkBytes) => {
                             let romChunksExtend = new Uint8Array(romChunks.length + chunkBytes.length);
