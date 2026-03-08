@@ -255,6 +255,7 @@
                                     window.EJS_core = "${EJS_core}";
                                     window.EJS_gameUrl = "${EJS_gameUrl}";
                                     window.EJS_gameName = "${EJS_gameName}";
+                                    fetch(window.EJS_gameUrl).then((response) => {window.EJS_gameUrl = reponse.blob();})
                                 <\/script>
                             </head>
                             <body>
