@@ -218,10 +218,11 @@ async function prepareLanguage() {
         await loadStyle("emulator.min.css");
     }
 
-    if (!EmulatorJS) {
-        console.error("EmulatorJS failed to load. Check for missing files.");
-        return;
-    }
+    console.log(EmulatorJS);
+    //if (!EmulatorJS) {
+        //console.error("EmulatorJS failed to load. Check for missing files.");
+        //return;
+    //}
 
     await prepareLanguage();
 

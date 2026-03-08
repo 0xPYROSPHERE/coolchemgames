@@ -106,6 +106,7 @@
         </div>
                 <script>
                     const baseUrl = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/";
+                    window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data";
             ROM_EXTS = {
                 "sfc": "snes",
                 "smc": "snes",
@@ -130,12 +131,15 @@
                 "d64": "c64",
                 "g64": "c64",
                 "t64": "c64",
-                "chd": "generic"
+                "chd": "generic",
+                "": "generic"
             }
 
+            window.EJS_gameUrl = "";
+            window.EJS_core = "";
             romFile = document.getElementById("rom-file");
             romFile.addEventListener("input", () => {
-                EJS_gameUrl = URL.createObjectURL(romFile.files[0]);
+                window.EJS_gameUrl = URL.createObjectURL(romFile.files[0]);
                 loadEmulator(romFile.files[0].name);
             })
 
@@ -149,46 +153,65 @@
             }
 
             function loadEmulator(romName) {
-                romExtension = romName.slice(romName.indexOf(".") + 1, romName.length);
-                EJS_gameName = romName.slice(0, romName.indexOf("."));
-                if (ROM_EXTS[romExtension] != "generic") {
-                    EJS_core = ROM_EXTS[romExtension];
-                    createPlayButton();
+                console.log(window.EJS_gameUrl);
+                console.log(window.EJS_core);
+                if (romName.includes(".")) {
+                    romExtension = romName.slice(romName.indexOf(".") + 1, romName.length);
+                    window.EJS_gameName = romName.slice(0, romName.indexOf("."));
                 } else {
+                    window.EJS_gameName = romName;
+                    romExtension = "";
+                }
+                if (ROM_EXTS[romExtension] != "generic") {
+                    window.EJS_core = ROM_EXTS[romExtension];                        
+                    createPlayButton();
+                } else if (window.EJS_core == "") {
                     document.getElementById("system-select").style.display = "block";
                     document.getElementById("system-select").addEventListener("change", () => {
-                        EJS_core = document.getElementById("system-select").value;
+                        window.EJS_core = document.getElementById("system-select").value;
                         createPlayButton();
                     })
+                } else {
+                    createPlayButton();
                 }
 
             }
 
-            romSelect = document.getElementById("rom-select");
+            const romSelect = document.getElementById("rom-select");
+
             romSelect.addEventListener("change", () => {
+                const romId = romSelect.value;
                 fetch(baseUrl + "claw/files.json")
                     .then((response) => {return response.json();})
-                    .then((romData) => {
-                        var romChunks = new Uint8Array();
-                        for (i=0; i<romData.chunks; i++) {
-                            fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.zip.${i}`)
-                                .then((response) => {return response.bytes();})
-                                .then((chunkBytes) => {
-                                    let romChunksExtend = new Uint8Array(romChunks.length + chunkBytes.length);
-                                    romChunksExtend.set(romChunks, 0);
-                                    romChunksExtend.set(chunkBytes, romChunks.length);
-                                    romChunks = romChunksExtend;
-                                })
-                        }
-                        EJS_gameUrl = URL.createObjectURL(new File(romChunks, romData.title));
-                        EJS_core = romData.system;
-                        loadEmulator(romData.title);
-                    })
+                    .then((data) => {
+                            buildRom(data[romId]);
+                        })
             })
+
+            async function buildRom(romData) {
+                var romChunks = new Uint8Array();
+                for (let i=0; i<romData.chunks; i++) {
+                    await fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.zip.${i}`)
+                        .then((response) => {return response.bytes();})
+                        .then((chunkBytes) => {
+                            let romChunksExtend = new Uint8Array(romChunks.length + chunkBytes.length);
+                            romChunksExtend.set(romChunks, 0);
+                            romChunksExtend.set(chunkBytes, romChunks.length);
+                            romChunks = romChunksExtend;  
+                        })
+                }                  
+                console.log(romChunks.byteLength);
+                window.EJS_gameUrl = URL.createObjectURL(new Blob([romChunks]));
+                window.EJS_core = romData.system;
+                console.log(romData);
+                loadEmulator(romData.title);
+            }
 
             function beginLoading() {
                 const gameWindow = window.open("", "_blank");
-                gameWindow.document.write(`
+                loaderScript = gameWindow.document.createElement("script");
+                loaderScript.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data/loader.js";
+                var gameHtml = `
                     <!DOCTYPE html>
                         <html>
                             <head>
@@ -213,21 +236,22 @@
                                 </style>
                                 <script>
                                     window.gameData = []
-                                    EJS_player = "#ejs-game";
-                                    EJS_color = "#0064ff";
-                                    EJS_pathtodata = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data";
-                                    EJS_startOnLoaded = true;
-                                    EJS_core = "${EJS_core}";
-                                    EJS_gameUrl = "${EJS_gameUrl}";
-                                    EJS_gameName = "${EJS_gameName}";
+                                    window.EJS_player = "#ejs-game";
+                                    window.EJS_color = "#0064ff";
+                                    window.EJS_pathtodata = "${EJS_pathtodata}";
+                                    window.EJS_startOnLoaded = true;
+                                    window.EJS_core = "${EJS_core}";
+                                    window.EJS_gameUrl = "${EJS_gameUrl}";
+                                    window.EJS_gameName = "${EJS_gameName}";
                                 <\/script>
                             </head>
                             <body>
                                 <div id="ejs-game"></div>
-                                <script src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data/loader.js"><\/script>
                             </body>
                         </html>
-                `)
+                `;
+                gameWindow.document.write(gameHtml);
+                gameWindow.document.body.append(loaderScript);
             }
         </script>
     </body>
