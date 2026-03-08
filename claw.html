@@ -190,7 +190,7 @@
 
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/files.json?v=1")
+                fetch(baseUrl + "claw/files.json?v=2")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
