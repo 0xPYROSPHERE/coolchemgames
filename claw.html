@@ -73,7 +73,37 @@
             font-family: 'Sigmar';
             font-weight: 400;
         }
+
+        body, html {
+            margin:0;
+            padding:0;
+            height:100%;
+            width:100%;
+            overflow:hidden;
+        }
+
+        #ejs-game {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            border:none;
+        }
     </style>
+    <script>
+                    function beginLoading() {
+                //const gameWindow = window.open("", "_blank");
+                loaderScript = document.createElement("script");
+                loaderScript.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data/4.2.3/loader.js";
+                gameDiv = document.createElement("div");
+                gameDiv.id = "ejs-game";
+                document.body.replaceChildren(gameDiv, loaderScript);
+                console.log(document.body.innerHTML);
+                //gameWindow.document.write(gameHtml);
+               // gameWindow.document.body.append(loaderScript);
+            }
+    </script>
     <body>
         <div id="game">
             <div id="wrapper">
@@ -112,7 +142,7 @@
         </div>
                 <script>
                     const baseUrl = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/";
-                    window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data";
+                    window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/4.2.3/data";
             ROM_EXTS = {
                 "sfc": "snes",
                 "smc": "snes",
@@ -143,6 +173,9 @@
 
             window.EJS_gameUrl = "";
             window.EJS_core = "";
+            window.EJS_startOnLoaded = true;
+            window.EJS_player = "#ejs-game";
+            window.EJS_color = "#0064ff";
             romFile = document.getElementById("rom-file");
             romFile.addEventListener("input", () => {
                 fileReader = new FileReader();
@@ -212,62 +245,13 @@
                             romChunks = romChunksExtend;  
                         })
                 }                  
-                fileReader = new FileReader();
-                fileReader.readAsDataURL(new Blob([romChunks]));
-                fileReader.addEventListener("load", () => {
-                    loadingText.style.display = "none";
-                    window.EJS_gameUrl = fileReader.result;
-                    window.EJS_core = romData.system;
-                    loadEmulator(romData.title);
-                })
+                loadingText.style.display = "none";
+                window.EJS_gameUrl = new Blob([romChunks])
+                window.EJS_core = romData.system;
+                loadEmulator(romData.title);
             }
 
-            function beginLoading() {
-                const gameWindow = window.open("", "_blank");
-                loaderScript = gameWindow.document.createElement("script");
-                loaderScript.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data/loader2.js";
-                var gameHtml = `
-                    <!DOCTYPE html>
-                        <html>
-                            <head>
-                                <title>${EJS_gameName}</title>
-                                <style>
-                                    body, html {
-                                        margin:0;
-                                        padding:0;
-                                        height:100%;
-                                        width:100%;
-                                        overflow:hidden;
-                                    }
 
-                                    #ejs-game {
-                                        position:absolute;
-                                        top:0;
-                                        left:0;
-                                        width:100%;
-                                        height:100%;
-                                        border:none;
-                                    }
-                                </style>
-                                <script>
-                                    window.gameData = []
-                                    window.EJS_player = "#ejs-game";
-                                    window.EJS_color = "#0064ff";
-                                    window.EJS_pathtodata = "${EJS_pathtodata}";
-                                    window.EJS_startOnLoaded = true;
-                                    window.EJS_core = "${EJS_core}";
-                                    window.EJS_gameUrl = "${EJS_gameUrl}";
-                                    window.EJS_gameName = "${EJS_gameName}";
-                                <\/script>
-                            </head>
-                            <body>
-                                <div id="ejs-game"></div>
-                            </body>
-                        </html>
-                `;
-                gameWindow.document.write(gameHtml);
-                gameWindow.document.body.append(loaderScript);
-            }
         </script>
     </body>
 </html>
