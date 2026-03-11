@@ -6,9 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<base href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/gd/">
-	<link rel="stylesheet" href="/themes/geometrydash-lite.io/rs/css/reboot.css">
-	<link rel="stylesheet" href="/themes/geometrydash-lite.io/rs/css/body-style.css?v=1">
-	<link rel="stylesheet" href="/themes/geometrydash-lite.io/rs/css/home.css?v=1.12">
+	<link rel="stylesheet" href="themes/geometrydash-lite.io/rs/css/reboot.css">
+	<link rel="stylesheet" href="themes/geometrydash-lite.io/rs/css/body-style.css?v=1">
+	<link rel="stylesheet" href="themes/geometrydash-lite.io/rs/css/home.css?v=1.12">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-132PQJH6Y8"></script>
 	<script>window.dataLayer = window.dataLayer || [];
 		function gtag() {
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<link rel="stylesheet" href="/game.css?v=1.3">
+	<link rel="stylesheet" href="game.css?v=1.3">
 	<div id="gameContainer"></div>
 	<div id="loader"><img class="logo" src="image/loading.png?v=1">
 		<div class="spinner"></div>
@@ -117,9 +117,9 @@
 		location.reload();
 	}
 </script>
-<script src="/game/lite/Build/UnityLoader.js"></script>
+<script src="game/lite/Build/UnityLoader.js"></script>
 <script>UnityLoader.compatibilityCheck = function (e, t, r) { t(); };
-	var gameInstance = UnityLoader.instantiate("gameContainer", "/game/lite/Build/geov9.json", { onProgress: UnityProgress });
+	var gameInstance = UnityLoader.instantiate("gameContainer", "game/lite/Build/geov9.json", { onProgress: UnityProgress });
 	function UnityProgress(gameInstance, progress) {
 		if (!gameInstance.Module) {
 			return;
@@ -184,7 +184,7 @@
 			}
 		}
 	}</script><!--End Game-->
-<script src="/themes/geometrydash-lite.io/rs/js/jquery-3.4.1.min.js"></script>
+<script src="themes/geometrydash-lite.io/rs/js/jquery-3.4.1.min.js"></script>
 <script>function ToggleInfo() {
 		if ($('button.hide-main-panel').children('i')[0].textContent != 'Info') {
 			$("div.main-panel").css('width', '0px');
