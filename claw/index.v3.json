@@ -1,0 +1,47 @@
+{
+    "aa": {
+        "title": "Call of Duty: Black Ops",
+        "system": "nds",
+        "chunks": 3
+    },
+    "af": {
+        "title": "Call of Duty: Modern Warfare",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ag": {
+        "title": "Call of Duty: Modern Warfare: Mobilized",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ad": {
+        "title": "Call of Duty: Modern Warfare 3 - Defiance",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ah": {
+        "title": "Call of Duty: World at War",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ai": {
+        "title": "Tony Hawk's Pro Skater",
+        "system": "psx",
+        "chunks": 18
+    },
+    "aj": {
+        "title": "Tony Hawk's Pro Skater 2",
+        "system": "psx",
+        "chunks": 24
+    },
+    "ak": {
+        "title": "Final Fantasy VI Advance",
+        "system": "gba",
+        "chunks": 1
+    },
+    "al": {
+        "title": "Hong Kong '97",
+        "system": "snes",
+        "chunks": 1
+    }
+}
