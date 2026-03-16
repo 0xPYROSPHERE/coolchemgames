@@ -68,5 +68,20 @@
         "title": "Grand Theft Auto",
         "system": "psx",
         "chunks": 24
+    },
+    "ar": {
+        "title": "Grand Theft Auto 2",
+        "system": "psx",
+        "chunks": 19
+    },
+    "as": {
+        "title": "Silent Hill",
+        "system": "psx",
+        "chunks": 16
+    },
+    "at": {
+        "title": "Doom (PlayStation)",
+        "system": "psx",
+        "chunks": 10
     }
 }
