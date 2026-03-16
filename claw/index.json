@@ -23,5 +23,10 @@
         "title": "Call of Duty: World at War",
         "system": "nds",
         "chunks": 3
+    },
+    "ai": {
+        "title": "Tony Hawk's Pro Skater",
+        "system": "psx",
+        "chunks": 18
     }
 }
