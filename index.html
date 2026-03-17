@@ -2,10 +2,10 @@
 <html>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=block" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=block" rel="stylesheet">
     <head>
         <style>
             body {
@@ -14,25 +14,47 @@
                 text-align: center;
             }
 
+            #wrapper {
+                display: flex;
+                position: relative;
+                height: 100vh;
+                overflow: hidden;
+            }
+
             #games-list {
                 list-style: none;
                 padding: 0px;
                 margin: 0px;
                 text-align: left;
+                width: 70vw;
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+
+            #sidebar-nav {
+                list-style-type: none !important;
+                margin: 0;
+                padding: 0;
             }
 
             #games-list li {
+                display: flex;
+                align-items: center;
                 border-bottom: 3px solid gray;
                 padding-top: 0px;
                 padding-right: 0px;
+                overflow: auto;
             }
 
             #games-list li a {
+                display: inline-block;
+                vertical-align: middle;
                 color: yellow;
                 font-size: 40px;
                 vertical-align: middle;
                 font-family: "Sigmar";
                 font-weight: 400;
+                margin-right: 50px;
             }
 
             #games-list li img {
@@ -44,70 +66,253 @@
                 margin-bottom: 23px;
                 margin-left: 5px;
             }
+
+            #sidebar {
+                width: 30vw;
+                height: 100vh;
+                padding-top: 5vh;
+                overflow: auto;
+            }
+
+            #sidebar-nav li {
+                margin: 0px;
+                padding: 10px;
+                font-family: "Merriweather Sans";
+                font-size: 20px;
+                overflow: hidden;
+                text-decoration: underline;
+                cursor: pointer;
+                color: lightgray;
+            }
+
+            #sidebar-nav li:hover, #sidebar-nav li.selected {
+                color: yellow;
+            }
+
+            #logo {
+                width: 240px;
+                height: 180px;
+            }
+
+            #suggestion-form {
+                display: none;
+                width: 70vw;
+                height: auto;
+                background-color: lightgray;
+            }
         </style>
+        <script>
+            const CONTEXT = "sites";
+            const GAMES = {
+                hollowknight: {
+                    name: "Hollow Knight",
+                    image: "hollowknight.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/hollowknight",
+                        gs: "https://script.google.com/macros/s/AKfycbyUi1CkylHF4v9rxdkd7PN2CuBfvaTeZEHGqsORZupUMhNlEUByKO04_h1iSsyz4h_OEA/exec"
+                    },
+                    categories: ["high-quality"]
+                },
+                myrustysubmarine: {
+                    name: "My Rusty Submarine",
+                    image: "myrustysubmarine.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/myrustysubmarine",
+                        gs: "https://script.google.com/macros/s/AKfycbx6d0MwCqjdbPeua9atbXE05DUwmkf8IaVe2TIoUAagQrnqkzxRs80EmAUzhVSdtNT1PQ/exec"
+                    },
+                    categories: ["multiplayer"]
+                },
+                subwaysurfers: {
+                    name: "Subway Surfers",
+                    image: "subwaysurfers.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/subwaysurfers",
+                        gs: "https://script.google.com/macros/s/AKfycbwObaApb8sIenLGpBsRLbFRcZsvxNdDl_W9-mz4DdrqZFs3gi7ftYgexALF9DQfIsOaiw/exec"
+                    },
+                    categories: ["endless", "high-quality"]
+                },
+                fnae: {
+                    name: "Five Nights At Epstein's",
+                    image: "fnae.webp",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/fnae",
+                        gs: "https://script.google.com/macros/s/AKfycbwZuaTP_jQtVWEKkuaYklS1eiZ1cOwxS1In6CFopVU9EzM7FOgNXGac8QVaZj8Je1fv/exec"
+                    },
+                    categories: ["horror"]
+                },
+                retrobowl: {
+                    name: "Retro Bowl",
+                    image: "retrobowl.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/retrobowl",
+                        gs: "https://script.google.com/macros/s/AKfycbxF6e8iD4lwcV6kTZa45YPMfNObhedVcioqn2C8Tf2KHNU4kVbplkCV13uO7N5gmr4dPg/exec"
+                    },
+                    categories: ["other"]
+                },
+                baldisbasics: {
+                    name: "Baldi's Basics",
+                    image: "baldisbasics.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/baldisbasics",
+                        gs: "https://script.google.com/macros/s/AKfycbwBzAiAOVbdLnO9G8GT3g-mTKeaQCTL3cR9qnYn9wp3173-AeGKaWcHJEtpBVZH8WhL3Q/exec"
+                    },
+                    categories: ["horror"]
+                },
+                "eaglercraft-1.12.2": {
+                    name: "Eaglercraft",
+                    image: "eaglercraft-1.12.2.png",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/eaglercraft-1-12-2",
+                        gs: "https://script.google.com/macros/s/AKfycbzKaa8SNBFYObCAD2SdTITuRQAEqySSMFPc6m3iuwth5W23OU2J76DY_l-l2xDjjQwxyA/exec"
+                    },
+                    categories: ["high-quality"]
+                },
+                buckshotroulette: {
+                    name: "Buckshot Roulette",
+                    image: "buckshotroulette.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/buckshotroulette",
+                        gs: "https://script.google.com/macros/s/AKfycbxV26-XsJej8614SXqz0n87JZ3wi76gkpbRu_Oq5Qn3k7QDBuQqkVbAvX7EiR7YsmBH/exec"
+                    },
+                    categories: ["horror", "high-quality"]
+                },
+                gdlite: {
+                    name: "Geometry Dash",
+                    image: "gd.png",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/gdlite",
+                        gs: "https://script.google.com/macros/s/AKfycbyRGiiXcGVIMBPMrgqgr3elTzoRAPs_XZqkJ7b0huy2PW3kbcEu2hdCVG5dPC78O3WS/exec"
+                    },
+                    categories: ["endless"]
+                },
+                gdsubzero: {
+                    name: "Geometry Dash SubZero",
+                    image: "gdsubzero2.png",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/gdsubzero",
+                        gs: "https://script.google.com/macros/s/AKfycbz3Yc1BFG4YEYXyZlOsEPcJBJWlMiHdhFmGdoaScf-YZjpHu5wDHQZ6nVV61DlPMgnC8Q/exec"
+                    },
+                    categories: ["endless"]
+                },
+                claw: {
+                    name: "rotalumE",
+                    image: "claw.png",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/claw",
+                        gs: "https://script.google.com/macros/s/AKfycbyL8qAcB55yu-_8MUiKXyi7E-AVOrhZaUJpcOaXTH_SxmA5GRq_Roa0yqDAL6HYV0I/exec"
+                    },
+                    categories: ["other"]
+                },
+                cuphead: {
+                    name: "Cuphead",
+                    image: "cuphead.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/cuphead",
+                        gs: "https://script.google.com/macros/s/AKfycbzintOZ_Vp_-V5A8YK7sNnEAdpS752GVgqW_RSXpsRUPybau1jsCYcTHXVqRbe-sjIn/exec"
+                    },
+                    categories: ["other"]
+                },
+                pool: {
+                    name: "8 Ball Pool",
+                    image: "pool.png",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/pool",
+                        gs: "https://script.google.com/macros/s/AKfycbzle5NlOy1V3-Iz9B0tJnCufvJgf2TsohV1FWoMz_558UI9jkniPN5ziy0d_yX3Ptpx/exec"
+                    },
+                    categories: ["multiplayer"]
+                },
+                "3dpool": {
+                    name: "3D Pool",
+                    image: "3dpool.png",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/3dpool",
+                        gs: "https://bilen2.website.yandexcloud.net/"
+                    },
+                    categories: ["multiplayer"]
+                },
+                chess: {
+                    name: "Chess",
+                    image: "chess.jpg",
+                    url: {
+                        sites: "https://sites.google.com/view/coolchemgames/chess",
+                        gs: "https://fritz.chessbase.com/en/Fritz"
+                    },
+                    categories: ["other"]
+                }
+            }
+        </script>
     </head>
     <body>
-        <ul id="games-list">
-            <li id="gdlite">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/gd.png">
-                <div style="display:inline-block">
-                <a href="https://sites.google.com/view/coolchemgames/gdlite">Geometry Dash</a><br>
-                <a style="color:aqua;" href="https://sites.google.com/view/coolchemgames/gdsubzero">SubZero</a>
-                </div>
-            </li>
-            <li id="eaglercraft-1.12.2">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/eaglercraft-1.12.2.png">
-                <a href="https://sites.google.com/view/coolchemgames/eaglercraft-1-12-2">Eaglercraft</a>
-            </li>
-            <li id="myrustysubmarine">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/myrustysubmarine.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/myrustysubmarine">My Rusty Submarine</a>
-            </li>
-            <li id="fnae">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/fnae.webp">
-                <a href="https://sites.google.com/view/coolchemgames/fnae">Five Nights At Epstein's</a>
-            </li>
-            <li id="baldisbasics">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/baldisbasics.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/baldisbasics">Baldi's Basics</a>
-            </li>
-            <li id="buckshotroulette">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/buckshotroulette.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/buckshotroulette">Buckshot Roulette</a>
-            </li>
-            <li id="retrobowl">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/retrobowl.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/retrobowl">Retro Bowl</a>
-            </li>
-            <li id="hollowknight">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/hollowknight.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/hollowknight">Hollow Knight</a>
-            </li>
-            <li id="cuphead">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/cuphead.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/cuphead">Cuphead</a>
-            </li>
-            <li id="subwaysurfers">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/subwaysurfers.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/subwaysurfers">Subway Surfers</a>
-            </li>            
-            <li id="chess">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/chess.jpg">
-                <a href="https://sites.google.com/view/coolchemgames/chess">Chess</a>
-            </li>
-            <li id="3dpool">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/3dpool.png">
-                <a href="https://sites.google.com/view/coolchemgames/3dpool">3D Pool</a>
-            </li>
-            <li id="pool">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/pool.png">
-                <a href="https://sites.google.com/view/coolchemgames/pool">8 Ball Pool</a>
-            </li>
-            <li id="claw">
-                <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/claw.png">
-                <a href="https://sites.google.com/view/coolchemgames/claw">"rotalume"</a>
-            </li>
-        </ul>
-        <a style="font-family: 'Merriweather Sans'; font-size: 32px; font-weight: 400; color: white; margin: 15px 0px;"href="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform">Suggest Games</a>
+        <div id="wrapper">
+            <aside id="sidebar">
+                <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/logo.png">
+                <div id="sidebar-nav">
+                    <li class="selected" id="nav-all">All Games</li>
+                    <li id="nav-high-quality">High Quality</li>
+                    <li id="nav-horror">Horror</li>
+                    <li id="nav-endless">Endless</li>
+                    <li id="nav-multiplayer">Multiplayer</li>
+                    <li id="nav-other">Other</li>
+                    <li id="nav-suggest-games">Suggest Games</li>
+                </ul>
+            </aside>
+            <ul id="games-list"></ul>
+            <iframe id="suggestion-form" src="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <!-- <a style="font-family: 'Merriweather Sans'; font-size: 32px; font-weight: 400; color: white; margin: 15px 0px;"href="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform">Suggest Games</a> -->
+            <script>
+                const gamesIdList = Object.keys(GAMES);
+                const gamesListElement = document.getElementById("games-list");
+                for (let i=0; i<gamesIdList.length; i++) {
+                    let gameId = gamesIdList[i];
+                    let gameElement = document.createElement("li");
+                    gameElement.id = gameId;
+                    let gameInfo = GAMES[gameId];
+                    gameElement.innerHTML = `
+                        <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/${gameInfo.image}">
+                        <a href="${gameInfo.url[CONTEXT]}">${gameInfo.name}</a>
+                    `
+                    gamesListElement.appendChild(gameElement);
+                }
+            </script>
+            <script>
+                var currentTab = "all";
+                var navButtons = document.getElementById("sidebar-nav").children;
+                for (let i=0; i<navButtons.length; i++) {
+                    let navButton = navButtons[i];
+                    navButton.addEventListener("click", () => {
+                        document.getElementById("nav-" + currentTab).classList.remove("selected");
+                        navButton.classList.add("selected");
+                        currentTab = navButton.id.slice(4);
+                        updateList();
+                    })
+                }
+
+                function updateList() {
+                    if (currentTab != "suggest-games") {
+                        let gamesList = document.getElementById("games-list");
+                        gamesList.style.display = "block";
+                        document.getElementById("suggestion-form").style.display = "none";
+                        let gameItems = gamesList.children;
+                        if (currentTab == "all") {
+                            for (let i=0; i<gameItems.length; i++) {
+                                gameItems[i].style.display = "flex";
+                            }
+                        } else {
+                            for (let i=0; i<gameItems.length; i++) {
+                                let gameItem = gameItems[i];
+                                if (GAMES[gameItem.id].categories.includes(currentTab)) {
+                                    gameItem.style.display = "flex";
+                                } else {
+                                    gameItem.style.display = "none";
+                                }
+                            }
+                        }
+                    } else {
+                        document.getElementById("games-list").style.display = "none";
+                        document.getElementById("suggestion-form").style.display = "block";
+                    }
+                }
+            </script>
+        </div>
     </body>
 </html>
