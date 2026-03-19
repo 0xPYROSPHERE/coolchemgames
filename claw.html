@@ -79,12 +79,28 @@
             <div id="wrapper">
                 <select name="ROM" id="rom-select">
                     <option disabled selected value>Select Game</option>
+                    <option disabled>--- Mario Kart ---</option>
+                    <option value="am">Super Mario Kart</option>
+                    <option value="an">Mario Kart: Super Circuit</option>
+                    <option value="ao">Mario Kart 64</option>
+                    <option value="ap">Mario Kart DS</option>
+                    <option disabled>--- GTA ---</option>
+                    <option value="aq">Grand Theft Auto</option>
+                    <option value="ar">Grand Theft Auto 2</option>
                     <option disabled>--- Call of Duty ---</option>
                     <option value="af">Call of Duty: Modern Warfare (DS)</option>
                     <option value="ag">Call of Duty: Modern Warfare 2 (DS)</option>
                     <option value="ad">Call of Duty: Modern Warfare 3 (DS)</option>
                     <option value="ah">Call of Duty: World at War (DS)</option>
                     <option value="aa">Call of Duty: Black Ops (DS)</option>
+                    <option disabled>--- Tony Hawk ---</option>
+                    <option value="ai">Tony Hawk's Pro Skater</option>
+                    <option value="aj">Tony Hawk's Pro Skater 2</option>
+                    <option disabled>--- Other Games ---</option>
+                    <option value="at">Doom (PlayStation)</option>
+                    <option value="as">Silent Hill</option>
+                    <option value="ak">Final Fantasy VI (GBA)</option>
+                    <option value="al">Hong Kong '97</option>
                 </select>
                 or
                 <input type="file" id="rom-file">
@@ -112,7 +128,7 @@
         </div>
                 <script>
                     const baseUrl = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/";
-                    window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data";
+                    window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/4.1.1/data";
             ROM_EXTS = {
                 "sfc": "snes",
                 "smc": "snes",
@@ -145,12 +161,8 @@
             window.EJS_core = "";
             romFile = document.getElementById("rom-file");
             romFile.addEventListener("input", () => {
-                fileReader = new FileReader();
-                fileReader.readAsDataURL(romFile.files[0]);
-                fileReader.addEventListener("load", () => {
-                    window.EJS_gameUrl = fileReader.result;
-                    loadEmulator(romFile.files[0].name);
-                })
+                window.EJS_gameUrl = romFile.files[0];
+                loadEmulator(romFile.files[0].name);
             })
 
             function createPlayButton() {
@@ -188,44 +200,60 @@
             }
 
             const romSelect = document.getElementById("rom-select");
-
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/index.json?v=2")
+                fetch(baseUrl + "claw/index.v5.json")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
                         })
             })
 
+            function fetchPart(number, dataArray) {
+              return fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.part${number}`)
+                  .then((response) => {return response.bytes();})
+                  .then((chunkBytes) => {
+                    dataArray[number] = chunkBytes;
+                  })
+            }
+
             async function buildRom(romData) {
                 var loadingText = document.getElementById("build-load-text");
                 loadingText.style.display = "inline";
+                downloadChunks(romData);
+            }
+
+            function downloadChunks(romData) {
+                var preChunks = new Array(romData.chunks);
+                var chunksLoaded = 0;
+                for (let i=0; i<romData.chunks; i++) {
+                  fetchPart(i, preChunks).then(() => {
+                    chunksLoaded++;
+                    if (chunksLoaded == romData.chunks) {
+                        combineChunksAndLoad(romData, preChunks);
+                    }
+                  });
+                }
+            }
+
+            function combineChunksAndLoad(romData, preChunks) {
                 var romChunks = new Uint8Array();
                 for (let i=0; i<romData.chunks; i++) {
-                    await fetch(`${baseUrl}claw/${romSelect.value}/${romSelect.value}.zip.${i}?v=1`)
-                        .then((response) => {return response.bytes();})
-                        .then((chunkBytes) => {
-                            let romChunksExtend = new Uint8Array(romChunks.length + chunkBytes.length);
-                            romChunksExtend.set(romChunks, 0);
-                            romChunksExtend.set(chunkBytes, romChunks.length);
-                            romChunks = romChunksExtend;  
-                        })
+                    let romChunksExtend = new Uint8Array(romChunks.length + preChunks[i].length);
+                    romChunksExtend.set(romChunks, 0);
+                    romChunksExtend.set(preChunks[i], romChunks.length);
+                    romChunks = romChunksExtend;  
                 }                  
-                fileReader = new FileReader();
-                fileReader.readAsDataURL(new Blob([romChunks]));
-                fileReader.addEventListener("load", () => {
-                    loadingText.style.display = "none";
-                    window.EJS_gameUrl = fileReader.result;
-                    window.EJS_core = romData.system;
-                    loadEmulator(romData.title);
-                })
+                document.getElementById("build-load-text").style.display = "none";
+                window.EJS_gameUrl = new Blob([romChunks]);
+                window.EJS_core = romData.system;
+                loadEmulator(romData.title);
             }
 
             function beginLoading() {
                 const gameWindow = window.open("", "_blank");
                 loaderScript = gameWindow.document.createElement("script");
-                loaderScript.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/data/loader2.js";
+                loaderScript.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/emulatorjs/4.1.1/data/loader.js";
                 var gameHtml = `
                     <!DOCTYPE html>
                         <html>
@@ -256,8 +284,10 @@
                                     window.EJS_pathtodata = "${EJS_pathtodata}";
                                     window.EJS_startOnLoaded = true;
                                     window.EJS_core = "${EJS_core}";
-                                    window.EJS_gameUrl = "${EJS_gameUrl}";
                                     window.EJS_gameName = "${EJS_gameName}";
+                                    window.addEventListener("message", (event) => {
+                                      window.EJS_gameUrl = event.data;
+                                    })
                                 <\/script>
                             </head>
                             <body>
@@ -266,6 +296,7 @@
                         </html>
                 `;
                 gameWindow.document.write(gameHtml);
+                gameWindow.postMessage(EJS_gameUrl, "*");
                 gameWindow.document.body.append(loaderScript);
             }
         </script>
