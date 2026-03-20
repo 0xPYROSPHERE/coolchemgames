@@ -1,0 +1,112 @@
+{
+    "aa": {
+        "title": "Call of Duty: Black Ops",
+        "system": "nds",
+        "chunks": 3
+    },
+    "af": {
+        "title": "Call of Duty: Modern Warfare",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ag": {
+        "title": "Call of Duty: Modern Warfare: Mobilized",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ad": {
+        "title": "Call of Duty: Modern Warfare 3 - Defiance",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ah": {
+        "title": "Call of Duty: World at War",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ai": {
+        "title": "Tony Hawk's Pro Skater",
+        "system": "psx",
+        "chunks": 18
+    },
+    "aj": {
+        "title": "Tony Hawk's Pro Skater 2",
+        "system": "psx",
+        "chunks": 24
+    },
+    "ak": {
+        "title": "Final Fantasy VI Advance",
+        "system": "gba",
+        "chunks": 1
+    },
+    "al": {
+        "title": "Hong Kong '97",
+        "system": "snes",
+        "chunks": 1
+    },
+    "am": {
+        "title": "Super Mario Kart",
+        "system": "snes",
+        "chunks": 1
+    },
+    "an": {
+        "title": "Mario Kart: Super Circuit",
+        "system": "gba",
+        "chunks": 1
+    },
+    "ao": {
+        "title": "Mario Kart 64",
+        "system": "n64",
+        "chunks": 1
+    },
+    "ap": {
+        "title": "Mario Kart DS",
+        "system": "nds",
+        "chunks": 2
+    },
+    "aq": {
+        "title": "Grand Theft Auto",
+        "system": "psx",
+        "chunks": 24
+    },
+    "ar": {
+        "title": "Grand Theft Auto 2",
+        "system": "psx",
+        "chunks": 19
+    },
+    "as": {
+        "title": "Silent Hill",
+        "system": "psx",
+        "chunks": 16
+    },
+    "at": {
+        "title": "Doom",
+        "system": "psx",
+        "chunks": 10
+    },
+    "au": {
+        "title": "Final Doom",
+        "system": "psx",
+        "chunks": 8
+    },
+    "av": {
+        "title": "Doom 64",
+        "system": "n64",
+        "chunks": 1
+    },
+    "aw": {
+        "title": "Quake",
+        "system": "n64",
+        "chunks": 1
+    },
+    "ax": {
+        "title": "Quake II",
+        "system": "psx",
+        "chunks": 11
+    },
+    "ay": {
+        "title": "Wolfenstein 3D",
+        "system": "jaguar",
+        "chunks": 1
+    }
+}

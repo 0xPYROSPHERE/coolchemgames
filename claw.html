@@ -84,6 +84,13 @@
                     <option value="an">Mario Kart: Super Circuit</option>
                     <option value="ao">Mario Kart 64</option>
                     <option value="ap">Mario Kart DS</option>
+                    <option disabled>--- id Software ---</option>
+                    <option value="at">Doom (PlayStation)</option>
+                    <option value="av">Doom 64</option>
+                    <option value="au">Final Doom (PlayStation)</option>
+                    <option value="aw">Quake (N64)</option>
+                    <option value="ax">Quake II (PlayStation)</option>
+                    <option value="ay">Wolfenstein 3D</option>
                     <option disabled>--- GTA ---</option>
                     <option value="aq">Grand Theft Auto</option>
                     <option value="ar">Grand Theft Auto 2</option>
@@ -97,7 +104,6 @@
                     <option value="ai">Tony Hawk's Pro Skater</option>
                     <option value="aj">Tony Hawk's Pro Skater 2</option>
                     <option disabled>--- Other Games ---</option>
-                    <option value="at">Doom (PlayStation)</option>
                     <option value="as">Silent Hill</option>
                     <option value="ak">Final Fantasy VI (GBA)</option>
                     <option value="al">Hong Kong '97</option>
@@ -202,7 +208,7 @@
             const romSelect = document.getElementById("rom-select");
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/index.v5.json")
+                fetch(baseUrl + "claw/index.v6.json")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
