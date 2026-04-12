@@ -79,6 +79,13 @@
             <div id="wrapper">
                 <select name="ROM" id="rom-select">
                     <option disabled selected value>Select Game</option>
+                    <option disabled>--- Mario ---</option>
+                    <option value="bf">Super Mario Bros.</option>
+                    <option value="bg">Super Mario Bros. 2</option>
+                    <option value="bh">Super Mario Bros. 3</option>
+                    <option value="bi">Super Mario World</option>
+                    <option value="bj">Yoshi's Island</option>
+                    <option value="bk">Super Mario 64</option>
                     <option disabled>--- Mario Kart ---</option>
                     <option value="am">Super Mario Kart</option>
                     <option value="an">Mario Kart: Super Circuit</option>
@@ -103,6 +110,13 @@
                     <option disabled>--- Tony Hawk ---</option>
                     <option value="ai">Tony Hawk's Pro Skater</option>
                     <option value="aj">Tony Hawk's Pro Skater 2</option>
+                    <option disabled>--- Pokemon ---</option>
+                    <option value="ba">Red</option>
+                    <option value="az">Blue</option>
+                    <option value="bb">Yellow</option>
+                    <option value="be">Emerald</option>
+                    <option value="bc">HeartGold</option>
+                    <option value="bd">SoulSilver</option>
                     <option disabled>--- Other Games ---</option>
                     <option value="as">Silent Hill</option>
                     <option value="ak">Final Fantasy VI (GBA)</option>
@@ -208,7 +222,7 @@
             const romSelect = document.getElementById("rom-select");
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/index.v6.json")
+                fetch(baseUrl + "claw/index.v7.json")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
