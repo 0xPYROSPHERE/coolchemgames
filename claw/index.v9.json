@@ -168,5 +168,45 @@
         "title": "Super Mario 64",
         "system": "n64",
         "chunks": 1
+    },
+    "bl": {
+        "title": "Super Ghouls 'n Ghosts",
+        "system": "snes",
+        "chunks": 1
+    },
+    "bm": {
+        "title": "The Legend of Zelda",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bn": {
+        "title": "Zelda II: The Adventure of Link",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bo": {
+        "title": "The Legend of Zelda: A Link to the Past",
+        "system": "snes",
+        "chunks": 1
+    },
+    "bp": {
+        "title": "The Legend of Zelda: Link's Awakening",
+        "system": "gb",
+        "chunks": 1
+    },
+    "bq": {
+        "title": "The Legend of Zelda: Ocarina of Time",
+        "system": "n64",
+        "chunks": 2
+    },
+    "br": {
+        "title": "The Legend of Zelda: Majora's Mask",
+        "system": "n64",
+        "chunks": 2
+    },
+    "bs": {
+        "title": "WarioWare, Inc.: Mega Microgame$!",
+        "system": "gba",
+        "chunks": 1
     }
 }

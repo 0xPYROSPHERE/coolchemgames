@@ -117,8 +117,17 @@
                     <option value="be">Emerald</option>
                     <option value="bc">HeartGold</option>
                     <option value="bd">SoulSilver</option>
+                    <option disabled>--- Zelda ---</option>
+                    <option value="bm">The Legend of Zelda</option>
+                    <option value="bn">The Adventure of Link</option>
+                    <option value="bo">A Link to the Past</option>
+                    <option value="bp">Link's Awakening</option>
+                    <option value="bq">Ocarina of Time</option>
+                    <option value="br">Majora's Mask</option>
                     <option disabled>--- Other Games ---</option>
                     <option value="as">Silent Hill</option>
+                    <option value="bl">Super Ghouls 'n Ghosts</option>
+                    <option value="bs">WarioWare</option>
                     <option value="ak">Final Fantasy VI (GBA)</option>
                     <option value="al">Hong Kong '97</option>
                 </select>
@@ -222,7 +231,7 @@
             const romSelect = document.getElementById("rom-select");
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/index.v8.json")
+                fetch(baseUrl + "claw/index.v9.json")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);
