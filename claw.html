@@ -153,6 +153,9 @@
                     <option value="c64">Commodore 64</option> 
                 </select>
                 <div style="display: none;" id="build-load-text">Building ROM...</div>
+                <button style="display: none;" id="play-button">
+                    <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/fsbutton.png">
+                </button>
             </div>
         </div>
                 <script>
@@ -193,15 +196,7 @@
                 window.EJS_gameUrl = romFile.files[0];
                 loadEmulator(romFile.files[0].name);
             })
-
-            function createPlayButton() {
-                const playButton = document.createElement("button");
-                const playIcon = document.createElement('img');
-                playIcon.src = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/fsbutton.png";
-                playButton.append(playIcon);
-                document.getElementById("wrapper").append(playButton);
-                playButton.addEventListener("click", () => {beginLoading();})
-            }
+            document.getElementById("play-button").addEventListener("click", () => {beginLoading();})
 
             function loadEmulator(romName) {
                 console.log(window.EJS_gameUrl);
@@ -215,15 +210,15 @@
                 }
                 if (ROM_EXTS[romExtension] != "generic") {
                     window.EJS_core = ROM_EXTS[romExtension];                        
-                    createPlayButton();
+                    document.getElementById("play-button").style.display = "inline";
                 } else if (window.EJS_core == "") {
                     document.getElementById("system-select").style.display = "inline";
                     document.getElementById("system-select").addEventListener("change", () => {
                         window.EJS_core = document.getElementById("system-select").value;
-                        createPlayButton();
+                        document.getElementById("play-button").style.display = "inline";
                     })
                 } else {
-                    createPlayButton();
+                    document.getElementById("play-button").style.display = "inline";
                 }
 
             }
@@ -249,6 +244,7 @@
             async function buildRom(romData) {
                 var loadingText = document.getElementById("build-load-text");
                 loadingText.style.display = "inline";
+                document.getElementById("play-button").style.display = "none";
                 downloadChunks(romData);
             }
 
