@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #36344e;
+            margin: 0px;
+        }
+
+        #game {
+            height: 500px;
+            width: 100vw;
+            background-color: gray;
+            text-align: center;
+        }
+
+        #game iframe {
+            margin: 0px;
+            border: 0px;
+            height: 480px;
+            width: 760px;
+        }
+
+        #game button {
+            display: inline;
+            margin: 0px 50px;
+        }
+
+        #wrapper {
+            display: block;
+            width: 100vw;
+            height: 380px;
+            padding: 60px 0px;
+        }
+
+        #game img {
+            height: 100px;
+            width: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 60px;
+            color: yellow;
+            font-family: 'Sigmar';
+            font-weight: 400;
+        }
+    </style>
+    <body>
+        <h1>Eaglercraft</h1>
+        <div id="game">
+            <div id="wrapper">
+                <button id ="playfs">
+                    <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/fsbutton.png">
+                </button>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("playfs").addEventListener("click", async () => {
+                response = await fetch('data:text/html;base64,PCFET0NUWVBFIGh0bWw+DQoNCg0KDQo8IS0tDQoNClRoaXMgZmlsZSBpcyBmcm9tIDAzLzMwLzIwMjUNCg0KQmUgYXdhcmUgdGhhdCBzb21lIHNlcnZlciBvd25lcnMgYXJlIGxhenkgYW5kIGRvIG5vdCB1cGRhdGUgdGhlaXIgY2xpZW50IHJlZ3VsYXJseQ0KDQpUaGlzIGlzIHRoZSBXQVNNLUdDIHZlcnNpb24gb2YgRWFnbGVyY3JhZnQgMS4xMiBhbmQgbWF5IG5vdCBiZSBjb21wYXRpYmxlIHdpdGggb3V0ZGF0ZWQgYnJvd3NlcnMNCg0KLS0+DQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCjxodG1sIHN0eWxlPSJ3aWR0aDoxMDAlO2hlaWdodDoxMDAlO2JhY2tncm91bmQtY29sb3I6YmxhY2s7Ij4NCjxoZWFkPg0KPG1ldGEgY2hhcnNldD0iVVRGLTgiIC8+DQo8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCwgbWluaW11bS1zY2FsZT0xLjAsIG1heGltdW0tc2NhbGU9MS4wIiAvPg0KPG1ldGEgbmFtZT0iZGVzY3JpcHRpb24iIGNvbnRlbnQ9IkVhZ2xlcmNyYWZ0IDEuMTIgV0FTTS1HQyBPZmZsaW5lIiAvPg0KPG1ldGEgbmFtZT0ia2V5d29yZHMiIGNvbnRlbnQ9ImVhZ2xlcmNyYWZ0LCBlYWdsZXJjcmFmdHgsIG1pbmVjcmFmdCwgMS4xMiwgMS4xMi4yIiAvPg0KPHRpdGxlPkVhZ2xlcmNyYWZ0IDEuMTIgV0FTTS1HQzwvdGl0bGU+DQo8bWV0YSBwcm9wZXJ0eT0ib2c6bG9jYWxlIiBjb250ZW50PSJlbi1VUyIgLz4NCjxtZXRhIHByb3BlcnR5PSJvZzp0eXBlIiBjb250ZW50PSJ3ZWJzaXRlIiAvPg0KPG1ldGEgcHJvcGVydHk9Im9nOnRpdGxlIiBjb250ZW50PSJFYWdsZXJjcmFmdCAxLjEyIFdBU00tR0MgT2ZmbGluZSIgLz4NCjxtZXRhIHByb3BlcnR5PSJvZzpkZXNjcmlwdGlvbiIgY29udGVudD0idGhpcyBmaWxlIGlzIG5vdCBhIHdlYnNpdGUsIHdob2V2ZXIgdXBsb2FkZWQgaXQgdG8gdGhpcyBVUkwgaXMgYSBkdW1iYXNzIiAvPg0KPHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPg0KInVzZSBzdHJpY3QiOw0KdmFyIHJlbGF5SWQgPSBNYXRoLmZsb29yKE1hdGgucmFuZG9tKCkgKiAzKTsNCg0KLy8gJSUlJSUlJSUlIGxhdW5jaCBvcHRpb25zICUlJSUlJSUlJSUlJQ0KDQp3aW5kb3cuZWFnbGVyY3JhZnRYT3B0cyA9IHsNCgljb250YWluZXI6ICJnYW1lX2ZyYW1lIiwNCgl3b3JsZHNEQjogIndvcmxkcyINCn07DQoNCi8vICUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUNCg0KPC9zY3JpcHQ+DQo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doLzB4UFlST1NQSEVSRS9jb29sY2hlbWdhbWVzQG1haW4vZWFnbGVyY3JhZnQvZWFnbGVyY3JhZnQtMS4xMi4yLWxvYWRlci5qcyI+PC9zY3JpcHQ+DQo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doLzB4UFlST1NQSEVSRS9jb29sY2hlbWdhbWVzQG1haW4vZWFnbGVyY3JhZnQvZWFnbGVyY3JhZnQtMS4xMi4yLmpzIj48L3NjcmlwdD4NCjxsaW5rIHR5cGU9ImltYWdlL3BuZyIgcmVsPSJzaG9ydGN1dCBpY29uIiBocmVmPSJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUNBQUFBQWdDQUlBQUFEOEdPMmpBQUFBQVhOU1IwSUFyczRjNlFBQUFBUm5RVTFCQUFDeGp3djhZUVVBQUFBSmNFaFpjd0FBRmlVQUFCWWxBVWxTSlBBQUFBUi9TVVJCVkVoTHRaWFpLM1pSRk1ZUGNxWGMrZ3Y0MTNESHhWdUdJcEloa2NpUVdhUmNjQ05qU0NrbGlnd1hTT1o1bm1mdjl6dm4yZTgrNThWNzUzc3VkbXV2dmRaNjFsNXI3WE9jOEgrR1MvRDE5YVVOa1B6NStha3RRSDUvZi8vNCtMQktaS3VSa3BVdFFqQ1VZRzVnRDJUMzh2THkvUHdzRGZMOS9mM0R3OFBUMDVNMGIyOXZuS0xoQ0tDQlQ0TDRndkJMQkllaTQvLzQrSGgxZFVWRVF1dFV1THU3RTgzRnhRVUduS0xCV0tmUWFBM1MrQVJFVnhhRU9EOC9Qems1MFhwemN5TURjSDE5emRaRzNOM2QzZHpjM052YjAxYVg1cFFVcFFHR1FKeGNRcGZOeXNvS2hVSWRIUjFvMXRiV2JJbllBZ3hJUERNek15OHZMemMzRnhxT2RNb1Jxd0pLOEc4QUxVWUloSE1pU0VoSXdJNkN5SWIwcVF6QzRlR2hzWENjMXRaV25aSUVLemRRSlFTWGdLeGZYMThSQ00zWjVlV2xjZlZBeEtPam8rUGo0OVBUVTg4bFRPazJOamJNc2VQYzN0NlNBZmNnRmRzek95TXVBZGVCZzBDUWkybGhZVUhPZU9MRENpc044RnpjUEZaWFYzdDdlekhZM3Q1R1ErNml0KzJ4TUFTc0toRUVXS3NtUkxSQkJVcFB2cEovVHBGS0ZCd0tZQWlJVG1pY3NiWWhkSGZKQWx0cWhVQ1ZzQ1Fod3NsbWVYbVp4aUJRVDljMEFyOUUyTzN2NzJzWVNFME4xeVFBcmtLeTBrQk1YTHFsWnFJWkhSM3Q2ZW1wcXFxU0RjQmRoWEVKU0ovYlVjM3E2dXErdmo2MjlHQjlmUjFXc0xXMU5Uczd1N1MwUk4ybG9jTWpJeU9FbTV1YlE3KzR1Smllbms0Lyt2djc3WTFod2hMQkVLaHdXSGl0ZFZGZlg5L1kyR2cySHVMaTRvd1VBeXNySzh5Q0c5N3JoMCtBcFA1UTJaeWNIRmxQVEV4VVZGUklCdm41K1doS1NrcDJkbmFNS2hwdGJXMjQyNkdnUS9yd3VBUUNaMWh3RmF5TGlvcms5aE1GQlFWMWRYVm1FMEJMUzR2cXczUUZCOGtuNElBeG9HUGtZcHhpNEZlRG1wcWFzN016NHBDbEFncUd3RDQ4cmpZMk5tYWNZcUMwdEpRMUtTbEpXeUU1T1prcFVLa0JBeFpWSW50QW9aaDA0K1E0OGZIeFBOR0JnWUhFeE1UMjluYWo5Y0JvZG5aMm1vM2psSldWTWVXMk9HUWNrNEIxYW1xcW9hR2hxYW1KangybEd4d2NwTDBtVWdSOGZKaHNXcUp0U2tvS1UyU2JISFVEcGtoUEJ1amQ4eHVRRzZQSlJNL1B6MDlQVDdPMU5ObloyVHczZmdaa1hWaFlLQ1VsVWhCQVRQK2hDVnlLWkdreTE3UlYwZzA0bGFheXNsSjZobFZlRkhCNGVGaEthb2dHZDBMeHRtVGdFK2hiaEtEblBqTXpndzhFM3FHTDJ0cGFCV3B1YmpZcWoyQm9hRWo2cnE0dU5BVFJaMFp3Q2JpTDZnWEV6SU5rNXZDQlFKOXJNRDQrcmtBOFFOSzAzNnVEZzRQeTh2THU3bTY4MEtqSUJOUjN6QkRvV1FNMWc5OHNueUIrVlNvUlc4Qy9Vd1I4MS9TdmhnTmo5Sk9Ua3d3VkVSVWRSQkVJMEJBZExSVkVSa2hMUzh2SXlFRFFscnNUUFRVMWxWRmhLeEFSdlpnVWxGTGJlZ0NmNEJ2SXNiaTRtSWc0RTVFb2dJSGhpS0NNdFUwV1VGaVZ5MDZqNWZBSklEZFNCRFF3K1BlZ0RmQlJjYk9Qd0g0RjlMdUZXSUlRZFFOS3dXcXpJRTBhb0ZVYUJzdytTUXVGdzB1TnRDOUErRjRpM1FOcmJnM0lEbitTQXNIaCt3WWlFcGV5QkVNTHYvY0FPNkt6QWlqeHhCK1k0d2lzQmhzc0pVaGpFYlBKZjROdytCK0pYcUxXM2J3K3dRQUFBQUJKUlU1RXJrSmdnZz09IiAvPg0KPC9oZWFkPg0KPGJvZHkgc3R5bGU9Im1hcmdpbjowcHg7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtvdmVyZmxvdzpoaWRkZW47YmFja2dyb3VuZC1jb2xvcjp3aGl0ZTsiIGlkPSJnYW1lX2ZyYW1lIj4NCjxkaXYgc3R5bGU9Im1hcmdpbjowcHg7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtmb250LWZhbWlseTpzYW5zLXNlcmlmO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7dXNlci1zZWxlY3Q6bm9uZTsiIGlkPSJsYXVuY2hfY291bnRkb3duX3NjcmVlbiI+DQo8ZGl2IHN0eWxlPSJtYXJnaW46YXV0bzt0ZXh0LWFsaWduOmNlbnRlcjsiPg0KPGgxPlRoaXMgZmlsZSBpcyBmcm9tIDxzcGFuIHN0eWxlPSJjb2xvcjojQUEwMDAwOyI+MDMvMzAvMjAyNTwvc3Bhbj48L2gxPg0KPGgyPkdhbWUgd2lsbCBsYXVuY2ggaW4gPHNwYW4gaWQ9ImxhdW5jaENvdW50ZG93bk51bWJlciI+NTwvc3Bhbj4uLi48L2gyPg0KPGRpdiBzdHlsZT0iYm9yZGVyOjJweCBzb2xpZCBibGFjazt3aWR0aDoxMDAlO2hlaWdodDoxNXB4O3BhZGRpbmc6MXB4O21hcmdpbi1ib3R0b206MjB2aDsiPjxkaXYgaWQ9ImxhdW5jaENvdW50ZG93blByb2dyZXNzIiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojNTU1NTU1O3dpZHRoOjAlO2hlaWdodDoxMDAlOyI+PC9kaXY+DQo8cCBzdHlsZT0ibWFyZ2luLXRvcDozMHB4OyI+PGJ1dHRvbiBpZD0ic2tpcENvdW50ZG93biIgYXV0b2ZvY3VzPlNraXAgQ291bnRkb3duPC9idXR0b24+PC9wPjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRtbD4NCg==');
+                content = await response.text();
+                const gameWindow = window.open("", "_blank");
+                gameWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+
+                    <head>
+                        <title>Eaglercraft 1.12.2</title>
+                        <style>
+                            body,
+                            html {
+                                margin: 0;
+                                padding: 0;
+                                height: 100%;
+                                width: 100%;
+                                overflow: hidden;
+                            }
+
+                            iframe {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                border: none;
+                            }
+                        </style>
+                    </head>
+
+                    <body>
+                        <iframe srcdoc='${content}' id="game" allowfullscreen></iframe>
+                    </body>
+
+                    </html>
+                `
+            );
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        #ruffle-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<script>
+  window.RufflePlayer = window.RufflePlayer || {};
+  window.RufflePlayer.config = {
+    "autoplay": "off",
+    "polyfills": true,
+    "letterbox": "on",
+    "backgroundColor": null,
+    "scale": "showAll",
+    "allowFullscreen": true,
+    "forceScale": true,
+    "forceAlign": true,
+    "splashScreen": true,
+    "wmode": "Window",
+    "unmuteOverlay": "hidden",
+    "quality": "high"
+  };
+</script>
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<object id="ruffle-player">
+  <param name="movie" value="https://cdn.jsdelivr.net/gh/web-ports/dumb-ways-to-die@main/data/main.swf">
+</object>
+</body>
+</html>

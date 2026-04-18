@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #36344e;
+            margin: 0px;
+        }
+
+        #game {
+            height: 500px;
+            width: 100vw;
+            background-color: gray;
+            text-align: center;
+        }
+
+        #game iframe {
+            margin: 0px;
+            border: 0px;
+            height: 480px;
+            width: 760px;
+        }
+
+        #game button {
+            display: inline;
+            margin: 0px 50px;
+        }
+
+        #wrapper {
+            display: block;
+            width: 100vw;
+            height: 380px;
+            padding: 60px 0px;
+        }
+
+        #game img {
+            height: 100px;
+            width: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 60px;
+            color: yellow;
+            font-family: 'Sigmar';
+            font-weight: 400;
+        }
+    </style>
+    <body>
+        <h1>Quake III Arena</h1>
+        <div id="game">
+            <div id="wrapper">
+                <button id ="playfs">
+                    <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/fsbutton.png">
+                </button>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("playfs").addEventListener("click", async () => {
+                response = await fetch('data:text/html;base64,PGh0bWw+PGhlYWQ+DQogICAgPHRpdGxlPlF1YWtlIElJSSBBcmVuYTwvdGl0bGU+DQogICAgPGJhc2UgaHJlZj0iaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL2dlbml6eS9RdWFrZTNAbWFzdGVyLyI+DQogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJRdWFrZTMuY3NzIj4NCjwvaGVhZD4NCg0KPGJvZHk+DQogICAgPGRpdiBpZD0ibG9hZGluZy10ZXh0IiBzdHlsZT0iY29sb3I6IGJsYWNrOyBmb250LWZhbWlseTogY3Vyc2l2ZTsgZm9udC1zaXplOiA0OHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IG1hcmdpbi10b3A6IDIwcHg7Ij5MT0FESU5HLi4uPC9kaXY+DQogICAgPGRpdiBpZD0idmlld3BvcnQtZnJhbWUiPjwvZGl2Pg0KICAgIDxzY3JpcHQ+DQogICAgICBhbGVydEN1c3RvbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpOw0KICAgICAgYWxlcnRDdXN0b20uc3JjID0gImFsZXJ0Q3VzdG9tLmpzIjsNCiAgICAgIG1haW5TY3JpcHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzY3JpcHQiKTsNCiAgICAgIG1haW5TY3JpcHQuc3JjID0gImh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC8weFBZUk9TUEhFUkUvY29vbGNoZW1nYW1lc0BtYWluL3EzYS5qcyINCiAgICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYWxlcnRDdXN0b20pOw0KICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChtYWluU2NyaXB0KTsNCiAgICA8L3NjcmlwdD4NCjwvYm9keT48L2h0bWw+');
+                content = await response.text();
+                const gameWindow = window.open("", "_blank");
+                gameWindow.document.write(content);
+                gameWindow.document.close();
+            });
+        </script>
+    </body>
+</html>
