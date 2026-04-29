@@ -24,7 +24,7 @@
                 overflow: hidden;
             }
 
-            #games-list {
+            #games-list, #games-panel {
                 list-style: none;
                 padding: 0px;
                 margin: 0px;
@@ -117,6 +117,23 @@
                 font-family: "Sigmar";
                 font-weight: 400;
                 margin: 10px;
+            }
+
+            #search {
+                width: 70vw;
+                height: 7vh;
+                font-family: "Merriweather Sans";
+                font-size: 24px;
+                background-color: #3b3944;
+                color: lightgray;
+                padding-left: 15px;
+                box-sizing: border-box;
+                position: sticky;
+                top: 0;
+            }
+
+            #search::-webkit-search-cancel-button {
+                display: none;
             }
         </style>
         <script>
@@ -373,7 +390,7 @@
                         sites: "https://sites.google.com/view/coolchemgames/wheresmywater",
                         gs: "https://script.google.com/macros/s/AKfycbx9Eg2bRPZ3PeQPpWXxenWdET33WC2RovaCY4anD9hdnkypiMcLHEA2ATAwLvk3ECU3/exec"
                     },
-                    categories: ["other"]
+                    categories: ["mobile"]
                 },
                 blockblast: {
                     name: "Block Blast",
@@ -563,21 +580,25 @@
             <aside id="sidebar">
                 <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/logo.png">
                 <div id="sidebar-nav">
+                    <li id="nav-share">Share</li>
+                    <li id="nav-suggest-games">Suggest Games</li>
                     <li class="selected" id="nav-all">All Games</li>
                     <li id="nav-popular">Popular</li>
                     <li id="nav-horror">Horror</li>
                     <li id="nav-endless">Endless</li>
                     <li id="nav-multiplayer">Multiplayer</li>
                     <li id="nav-old-school">Old School</li>
-                    <li id="nav-mobile">Mobile Games</li>
-                    <li id="nav-flash">Flash Games</li>
+                    <li id="nav-mobile">Mobile</li>
+                    <li id="nav-flash">Flash</li>
                     <li id="nav-other">Other</li>
                     <li id="nav-duck-life">Duck Life</li>
-                    <li id="nav-suggest-games">Suggest Games</li>
-                    <li id="nav-share">Share</li>
                 </ul>
             </aside>
-            <ul id="games-list"></ul>
+            <div id="games-panel">
+                <input type="search" id="search" placeholder="Search all games..." incremental>
+                <ul id="games-list"></ul>    
+            </div>
+            
             <iframe id="suggestion-form" src="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div id="share-page">
                 <h1>tinyurl.com/2eunzc9t</h1><br>
@@ -607,17 +628,18 @@
                         document.getElementById("nav-" + currentTab).classList.remove("selected");
                         navButton.classList.add("selected");
                         currentTab = navButton.id.slice(4);
+                        searchBar.placeholder = `Search ${navButton.textContent.toLowerCase()}...`;
                         updateList();
                     })
                 }
 
                 function updateList() {
                     if (currentTab == "suggest-games") {
-                        document.getElementById("games-list").style.display = "none";
+                        document.getElementById("games-panel").style.display = "none";
                         document.getElementById("share-page").style.display = "none";
                         document.getElementById("suggestion-form").style.display = "block";
                     } else if (currentTab == "share") {
-                        document.getElementById("games-list").style.display = "none";
+                        document.getElementById("games-panel").style.display = "none";
                         document.getElementById("suggestion-form").style.display = "none";
                         document.getElementById("share-page").style.display = "block";
                         if (CONTEXT == "sites") {
@@ -625,9 +647,10 @@
                         }
                     } else {
                         let gamesList = document.getElementById("games-list");
-                        gamesList.style.display = "block";
+                        document.getElementById("games-panel").style.display = "block";
                         document.getElementById("suggestion-form").style.display = "none";
                         document.getElementById("share-page").style.display = "none";
+                        document.getElementById("games-panel").scrollTo(0, 0);
                         let gameItems = gamesList.children;
                         if (currentTab == "all") {
                             for (let i=0; i<gameItems.length; i++) {
@@ -642,6 +665,26 @@
                                     gameItem.style.display = "none";
                                 }
                             }
+                        }
+                        search(searchBar.value);
+                    }
+                }
+            </script>
+            <script>
+                var searchBar = document.getElementById("search");
+                searchBar.addEventListener("search", () => {
+                    search(searchBar.value);
+                })
+
+                function search(query) {
+                    let searchQuery = query.toLowerCase();
+                    let gameItems = document.getElementById("games-list").children;
+                    for (let i=0; i<gameItems.length; i++) {
+                        let gameItem = gameItems[i];
+                        let gameObject = GAMES[gameItem.id];
+                        if (currentTab == "all" || gameObject.categories.includes(currentTab)) {
+                            let gameName = gameObject.name.toLowerCase();
+                            gameItem.style.display = gameName.includes(searchQuery) ? "flex" : "none";
                         }
                     }
                 }
