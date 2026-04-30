@@ -127,6 +127,10 @@
                 background-color: #3b3944;
                 color: lightgray;
                 padding-left: 15px;
+                border-bottom: 1.6px solid gray;
+                border-top: 0;
+                border-left: 0;
+                border-right: 0;
                 box-sizing: border-box;
                 position: sticky;
                 top: 0;
@@ -581,7 +585,7 @@
                 <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/logo.png">
                 <div id="sidebar-nav">
                     <li id="nav-share">Share</li>
-                    <li id="nav-suggest-games">Suggest Games</li>
+                    <li id="nav-random">Random Game</li>
                     <li class="selected" id="nav-all">All Games</li>
                     <li id="nav-popular">Popular</li>
                     <li id="nav-horror">Horror</li>
@@ -592,6 +596,7 @@
                     <li id="nav-flash">Flash</li>
                     <li id="nav-other">Other</li>
                     <li id="nav-duck-life">Duck Life</li>
+                    <li id="nav-suggest-games">Suggest Games</li>
                 </ul>
             </aside>
             <div id="games-panel">
@@ -625,11 +630,16 @@
                 for (let i=0; i<navButtons.length; i++) {
                     let navButton = navButtons[i];
                     navButton.addEventListener("click", () => {
-                        document.getElementById("nav-" + currentTab).classList.remove("selected");
-                        navButton.classList.add("selected");
-                        currentTab = navButton.id.slice(4);
-                        searchBar.placeholder = `Search ${navButton.textContent.toLowerCase()}...`;
-                        updateList();
+                        if (navButton.id != "nav-random") {
+                            document.getElementById("nav-" + currentTab).classList.remove("selected");
+                            navButton.classList.add("selected");
+                            currentTab = navButton.id.slice(4);
+                            updateList();
+                        } else {
+                            let selectedGame = gamesIdList[Math.floor(Math.random() * gamesIdList.length)];
+                            let gameLink = document.getElementById(selectedGame).querySelector("a");
+                            gameLink.click();
+                        }
                     })
                 }
 
@@ -644,8 +654,9 @@
                         document.getElementById("share-page").style.display = "block";
                         if (CONTEXT == "sites") {
                             document.getElementById("sites-link").style.display = "none";
-                        }
+                        }   
                     } else {
+                        searchBar.placeholder = `Search ${document.getElementById("nav-" + currentTab).textContent.toLowerCase()}...`;
                         let gamesList = document.getElementById("games-list");
                         document.getElementById("games-panel").style.display = "block";
                         document.getElementById("suggestion-form").style.display = "none";
