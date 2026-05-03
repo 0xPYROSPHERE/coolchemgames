@@ -1,0 +1,13 @@
+{
+"companyName": "PP",
+"productName": "Angry Goat Simulator 3D Mad Goat Attack",
+"dataUrl": "AngryGoat.data.unityweb",
+"asmCodeUrl": "AngryGoat.asm.code.unityweb",
+"asmMemoryUrl": "AngryGoat.asm.memory.unityweb",
+"asmFrameworkUrl": "AngryGoat.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
