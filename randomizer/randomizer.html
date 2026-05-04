@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8>
-<base href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/randomizer">
+<base href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/randomizer/">
 <title>Universal Pokemon Randomizer</title>
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -28,8 +28,29 @@ async function addFileToVFSandStart(e){
 		settingFileUint8=new Uint8Array(settingFile);
 		cheerpjAddStringFile("/str/settings/"+i+".rnqs", settingFileUint8);
 	}
-	for (let i of ["customnames.mcn", "gameboy_jap_.tbl", "gba_english.tbl", "gba_jap.tbl", "Generation4.tbl", "Generation5.tbl"]) {
-		configFile=await fetch(i);
+	for (let i of [
+		"customnames.rncn", 
+		"gameboy_jap.tbl", 
+		"gba_english.tbl", 
+		"gba_jap.tbl",
+		"gen1_offsets.ini",
+		"gen2_offsets.ini",
+		"gen3_offsets.ini",
+		"gen4_offsets.ini",
+		"gen5_offsets.ini", 
+		"Generation4.tbl", 
+		"Generation5.tbl",
+		"green_translation.tbl",
+		"gsc_english.tbl",
+		"gsc_espita.tbl",
+		"gsc_freger.tbl",
+		"rby_english.tbl",
+		"rby_espita.tbl",
+		"rby_freger.tbl",
+		"realistic_gen1_english.tbl",
+		"vietcrystal.tbl"
+	]) {
+		configFile=await fetch("config/" + i);
 		configFile=await configFile.arrayBuffer()
 		configFileUint8=new Uint8Array(configFile);
 		cheerpjAddStringFile("/str/config/"+i, configFileUint8);
