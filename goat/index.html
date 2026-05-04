@@ -2,11 +2,15 @@
 <html lang="en-us">
   <head>
     <base href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/goat/">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline' 'self' blob: https://cdn.jsdelivr.net/">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Angry Goat Simulator 3D Mad Goat Attack</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="TemplateData/style.css">\
+    <style>
+      body {background-color: black;}
+    </style>
     <script>
       window.fileMergerConfig = {
         files: [
@@ -31,6 +35,17 @@
         <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
         <div class="title">Angry Goat Simulator 3D Mad Goat Attack</div>
       </div>
+      <script>
+        var clicks = 0;
+        var gameContainer = document.getElementById("gameContainer")
+        gameContainer.addEventListener("click", () => {
+          if (clicks > 1) {
+            gameContainer.requestPointerLock();
+          }
+          clicks++;
+          setTimeout(() => {clicks=0;}, 1000);
+        })
+      </script>
     </div>
   </body>
 </html>
