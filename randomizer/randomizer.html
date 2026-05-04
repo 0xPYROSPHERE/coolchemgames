@@ -48,12 +48,13 @@ async function addFileToVFSandStart(e){
 		"rby_espita.tbl",
 		"rby_freger.tbl",
 		"realistic_gen1_english.tbl",
-		"vietcrystal.tbl"
+		"vietcrystal.tbl",
+		"config.ini"
 	]) {
 		configFile=await fetch("config/" + i);
 		configFile=await configFile.arrayBuffer()
 		configFileUint8=new Uint8Array(configFile);
-		cheerpjAddStringFile("/str/config/"+i, configFileUint8);
+		cheerpjAddStringFile("/str/"+i, configFileUint8);
 	}
     var jarFile = await fetch("randomizer.zip");
     jarFile = new Uint8Array(await jarFile.arrayBuffer());
