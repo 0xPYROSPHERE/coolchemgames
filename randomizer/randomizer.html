@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset=utf-8>
-<base href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/">
+<base href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/randomizer">
 <title>Universal Pokemon Randomizer</title>
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -28,6 +28,18 @@ async function addFileToVFSandStart(e){
 		settingFileUint8=new Uint8Array(settingFile);
 		cheerpjAddStringFile("/str/settings/"+i+".rnqs", settingFileUint8);
 	}
+	for (let i of ["customnames.mcn", "gameboy_jap_.tbl", "gba_english.tbl", "gba_jap.tbl", "Generation4.tbl", "Generation5.tbl"]) {
+		configFile=await fetch(i);
+		configFile=await configFile.arrayBuffer()
+		configFileUint8=new Uint8Array(configFile);
+		cheerpjAddStringFile("/str/config/"+i, configFileUint8);
+	}
+    var jarFile = await fetch("randomizer.zip");
+    jarFile = new Uint8Array(await jarFile.arrayBuffer());
+    var jarJsFile = await fetch("randomizer.zip.js");
+    jarJsFile = new Uint8Array(await jarJsFile.arrayBuffer());
+    cheerpjAddStringFile("/str/internal/randomizer.jar", jarFile);
+    cheerpjAddStringFile("/str/internal/randomizer.jar.js", jarJsFile);
 	await cheerpjCreateDisplay(1500,500);
 	//rompicker.files[0]
 	const reader=new FileReader();
@@ -37,8 +49,8 @@ async function addFileToVFSandStart(e){
 			let arrayBuffer = evt.target.result
 			var array = new Uint8Array(arrayBuffer);
 			cheerpjAddStringFile("/str/"+e.target.files[0].name, array);
-			cheerpjRunJar("gh/0xPYROSPHERE/coolchemgames@main/randomizer.zip");
-		}r
+			cheerpjRunJar("/str/internal/randomizer.jar");
+		}
 	}
 }
 function exportfiles(){
