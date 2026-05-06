@@ -6,7 +6,7 @@
 <title>Universal Pokemon Randomizer</title>
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 </head>
 <body>
 <label for="rompicker">Select Pokémon rom:</label>
@@ -26,43 +26,13 @@ async function addFileToVFSandStart(e){
 		settingFile=await fetch('https://cdn.jsdelivr.net/gh/Thysbelon/OnlineUniversalPokemonRandomizer@main/settings/'+i+'.rnqs')
 		settingFile=await settingFile.arrayBuffer()
 		settingFileUint8=new Uint8Array(settingFile);
-		cheerpjAddStringFile("/str/settings/"+i+".rnqs", settingFileUint8);
+		cheerpOSAddStringFile("/str/"+i+".rnqs", settingFileUint8);
 	}
-	for (let i of [
-		"customnames.rncn", 
-		"gameboy_jap.tbl", 
-		"gba_english.tbl", 
-		"gba_jap.tbl",
-		"gen1_offsets.ini",
-		"gen2_offsets.ini",
-		"gen3_offsets.ini",
-		"gen4_offsets.ini",
-		"gen5_offsets.ini", 
-		"Generation4.tbl", 
-		"Generation5.tbl",
-		"green_translation.tbl",
-		"gsc_english.tbl",
-		"gsc_espita.tbl",
-		"gsc_freger.tbl",
-		"rby_english.tbl",
-		"rby_espita.tbl",
-		"rby_freger.tbl",
-		"realistic_gen1_english.tbl",
-		"vietcrystal.tbl",
-		"config.ini",
-		"index.list"
-	]) {
-		configFile=await fetch("config/" + i);
-		configFile=await configFile.arrayBuffer()
-		configFileUint8=new Uint8Array(configFile);
-		cheerpjAddStringFile("/str/"+i, configFileUint8);
-	}
-    var jarFile = await fetch("randomizer.zip");
-    jarFile = new Uint8Array(await jarFile.arrayBuffer());
-    var jarJsFile = await fetch("randomizer.zip.js");
-    jarJsFile = new Uint8Array(await jarJsFile.arrayBuffer());
-    cheerpjAddStringFile("/str/internal/randomizer.jar", jarFile);
-    cheerpjAddStringFile("/str/internal/randomizer.jar.js", jarJsFile);
+
+	jarFile = await fetch("PokeRandoZX.zip");
+	jarFile = await jarFile.arrayBuffer();
+	cheerpOSAddStringFile("/str/randomizer.jar", new Uint8Array(jarFile));
+
 	await cheerpjCreateDisplay(1500,500);
 	//rompicker.files[0]
 	const reader=new FileReader();
@@ -71,8 +41,8 @@ async function addFileToVFSandStart(e){
 		if (evt.target.readyState === FileReader.DONE) {
 			let arrayBuffer = evt.target.result
 			var array = new Uint8Array(arrayBuffer);
-			cheerpjAddStringFile("/str/"+e.target.files[0].name, array);
-			cheerpjRunJar("/str/internal/randomizer.jar");
+			cheerpOSAddStringFile("/str/"+e.target.files[0].name, array);
+			cheerpjRunJar("str/randomizer.jar");
 		}
 	}
 }
