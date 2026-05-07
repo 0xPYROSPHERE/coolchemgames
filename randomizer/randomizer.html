@@ -21,14 +21,6 @@ rompicker.addEventListener('change', addFileToVFSandStart);
 document.getElementById("save").addEventListener('click', exportfiles)
 async function addFileToVFSandStart(e){
 	await cheerpjInit();
-	// put settings files in filesystem
-	for (let i of ['balanced','classic','randomizer_race','super_randomizer_race','trainers_only']) {
-		settingFile=await fetch('https://cdn.jsdelivr.net/gh/Thysbelon/OnlineUniversalPokemonRandomizer@main/settings/'+i+'.rnqs')
-		settingFile=await settingFile.arrayBuffer()
-		settingFileUint8=new Uint8Array(settingFile);
-		cheerpOSAddStringFile("/str/"+i+".rnqs", settingFileUint8);
-	}
-
 	jarFile = await fetch("PokeRandoZX.zip");
 	jarFile = await jarFile.arrayBuffer();
 	cheerpOSAddStringFile("/str/randomizer.jar", new Uint8Array(jarFile));
