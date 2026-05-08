@@ -45,5 +45,5 @@ document.getElementById("new").addEventListener("click", () => {
             </body>
         </html>
     `);
-    siteWindow.postMessage(siteHtml, "*");
+    siteWindow.postMessage(siteFrame.srcdoc, "*");
 })
