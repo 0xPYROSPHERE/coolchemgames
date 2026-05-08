@@ -139,6 +139,11 @@
             #search::-webkit-search-cancel-button {
                 display: none;
             }
+
+            a {
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
         <script>
             const CONTEXT = "sites";
@@ -213,37 +218,25 @@
                 tboi: {
                     name: "The Binding of Isaac",
                     image: "tboi.jpg",
-                    url: {
-                        sites: "https://sites.google.com/view/coolchemgames/tboi",
-                        gs: "https://script.google.com/macros/s/AKfycbwISaSEapp_1FS4O9yIM_CUsvdlbjT2_JDdZOgkRy1x5Rt2FX2-LcPRyNwwNFa_Pfo4/exec"
-                    },
+                    url: "tboi.html",
                     categories: ["flash"]
                 },
                 poker: {
                     name: "Poker",
                     image: "poker.jpg",
-                    url: {
-                        sites: "https://sites.google.com/view/coolchemgames/poker",
-                        gs: "https://script.google.com/macros/s/AKfycbwz-Ky_HPSyiNrPukLN5wUUOz_wXLrAEDCaxjX8cK_QzImdmBPkOgmXuucLah2luRuu/exec"
-                    },
+                    url: "poker.html",
                     categories: ["casino"]
                 },
                 blackjack: {
                     name: "Blackjack",
                     image: "blackjack.jpg",
-                    url: {
-                        sites: "https://sites.google.com/view/coolchemgames/blackjack",
-                        gs: "https://script.google.com/macros/s/AKfycbzh3n3AWNtYwu1cjVe_QlAZcYejAvd5Y_CJxo_yiY0gsAN2AEJxolvKcl9dpd_nVLZo/exec"
-                    },
+                    url: "blackjack.html",
                     categories: ["casino"]
                 },
                 templerun2: {
                     name: "Temple Run",
                     image: "templerun2.png",
-                    url: {
-                        sites: "https://sites.google.com/view/coolchemgames/templerun2",
-                        gs: "https://script.google.com/macros/s/AKfycbwW0PTPEGYTVnc4si_9qU2zz0P53ndcNUxVSP4l75EM4F0hyGBDXy_WVHH5ndQyguNmyw/exec"
-                    },
+                    url: "templerun2.html",
                     categories: ["mobile", "endless"]
                 },
                 "eaglercraft-1.12.2": {
@@ -651,7 +644,7 @@
                     let gameInfo = GAMES[gameId];
                     gameElement.innerHTML = `
                         <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/${gameInfo.image}">
-                        <a href="">${gameInfo.name}</a>
+                        <a>${gameInfo.name}</a>
                     `
                     gameElement.querySelector("a").addEventListener("click", () => {
                         fetch((!gameInfo.external ? "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files@main/" : "") + gameInfo.url).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;})
