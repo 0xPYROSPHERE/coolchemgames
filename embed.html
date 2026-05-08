@@ -152,16 +152,15 @@
                 subwaysurfers: {
                     name: "Subway Surfers",
                     image: "subwaysurfers.jpg",
+                    external: false,
                     url: "subwaysurfers.html",
                     categories: ["endless", "mobile"]
                 },  
                 balatro: {
                     name: "Balatro",
                     image: "balatro.jpg",
-                    url: {
-                        sites: "https://sites.google.com/view/coolchemgames/balatro",
-                        gs: "https://script.google.com/macros/s/AKfycbwv5Fo4X3ECp7GfcXKWVxBOfoWrWMRWA52vRkwL1ejDxiX6rj2kjzdjWobjQH2gpV6kIw/exec"
-                    },
+                    external: false,
+                    url: "balatro.html",
                     categories: ["other"]
                 },
                 bitlife: {
@@ -680,7 +679,7 @@
                         <a href="">${gameInfo.name}</a>
                     `
                     gameElement.querySelector("a").addEventListener("click", () => {
-                        fetch("scripts/" + gameInfo.url).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;})
+                        fetch(!gameInfo.external ? "scripts/" : "" + gameInfo.url).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;})
                     })
                     gamesListElement.appendChild(gameElement);
                 }
