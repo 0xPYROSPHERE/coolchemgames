@@ -5,7 +5,7 @@ async function fetchSite() {
 }
 
 const siteFrame = document.getElementById("site");
-siteFrame.srcdoc = await fetchSite();
+fetchSite().then(data => {siteFrame.srcdoc = data;});
 const siteHtml = siteFrame.srcdoc;
 siteFrame.addEventListener("fullscreenchange", () => {
     siteFrame.style.display = document.fullscreenElement ? "block" : "none"
