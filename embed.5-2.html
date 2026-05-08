@@ -654,7 +654,7 @@
                         <a href="">${gameInfo.name}</a>
                     `
                     gameElement.querySelector("a").addEventListener("click", () => {
-                        fetch((!gameInfo.external ? "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files/" : "") + gameInfo.url).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;})
+                        fetch((!gameInfo.external ? "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files@main/" : "") + gameInfo.url).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;})
                     })
                     gamesListElement.appendChild(gameElement);
                 }
