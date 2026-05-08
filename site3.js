@@ -20,6 +20,14 @@ document.getElementById("new").addEventListener("click", () => {
                         height: 100%;
                         overflow: hidden;
                     }
+                    #main {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                    }
                 </style>
             </head>
             <body>
