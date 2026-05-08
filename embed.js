@@ -44,5 +44,5 @@ document.getElementById("new").addEventListener("click", () => {
             </body>
         </html>
     `);
-    siteWindow.postMessage(siteFrame.srcdoc, "*");
+    siteWindow.postMessage(fetch(`embed.html?v=${Math.random() * 100000}`).then(response => response.text()), "*");
 })
