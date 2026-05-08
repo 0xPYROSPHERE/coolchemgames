@@ -537,6 +537,7 @@
                         if (linkSource.includes("cdn.jsdelivr.net")) {
                             fetch(linkSource).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;});
                         } else {
+                            window.frameElement.removeAttribute("srcdoc");
                             window.frameElement.src = linkSource;
                         }
                     })
