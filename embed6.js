@@ -1,6 +1,18 @@
+var currentVersion = 30;
+
 async function fetchSite() {
-    let htmlString = await fetch(`embed.html?v=${Math.random() * 100000}`)
-    htmlString = await htmlString.text();
+    let htmlString = "";
+    let foundVersion = false;
+    let i = currentVersion;
+    while (!foundVersion) {
+        let fetchRequest = await fetch(`embed${i}.html`);
+        if (fetchRequest.status != 403) {
+            foundVersion = true;
+            currentVersion = i;
+            htmlString = await fetchRequest.text();
+        }
+        i--;
+    }
     return htmlString;
 }
 
