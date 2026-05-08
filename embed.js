@@ -1,5 +1,6 @@
 const siteFrame = document.getElementById("site");
 fetch(`embed.html?v=${Math.random() * 100000}`).then(response => response.text()).then(response => {siteFrame.srcdoc = response});
+const siteHtml = siteFrame.srcdoc;
 siteFrame.addEventListener("fullscreenchange", () => {
     siteFrame.style.display = document.fullscreenElement ? "block" : "none"
 });
@@ -44,5 +45,5 @@ document.getElementById("new").addEventListener("click", () => {
             </body>
         </html>
     `);
-    siteWindow.postMessage(fetch(`embed.html?v=${Math.random() * 100000}`).then(response => response.text()), "*");
+    siteWindow.postMessage(siteHtml, "*");
 })
