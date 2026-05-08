@@ -37,6 +37,7 @@ document.getElementById("new").addEventListener("click", () => {
                     window.addEventListener("message", (e) => {
                             if (!loaded) {
                                 document.getElementById("main").srcdoc = e.data;
+                                loaded = true;
                             }
                         });
                 <\/script>
