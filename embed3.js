@@ -1,5 +1,11 @@
+async function fetchSite() {
+    let htmlString = await fetch(`embed.html?v=${Math.random() * 100000}`)
+    htmlString = await htmlString.text();
+    return htmlString;
+}
+
 const siteFrame = document.getElementById("site");
-fetch(`embed.html?v=${Math.random() * 100000}`).then(response => response.text()).then(response => {siteFrame.srcdoc = response});
+siteFrame.srcdoc = await fetchSite();
 const siteHtml = siteFrame.srcdoc;
 siteFrame.addEventListener("fullscreenchange", () => {
     siteFrame.style.display = document.fullscreenElement ? "block" : "none"
@@ -7,7 +13,7 @@ siteFrame.addEventListener("fullscreenchange", () => {
 document.getElementById("open").addEventListener("click", () => {
     siteFrame.requestFullscreen();
 });
-document.getElementById("new").addEventListener("click", () => {
+document.getElementById("new").addEventListener("click", async () => {
     const siteWindow = window.open("", "_blank");
     siteWindow.document.write(`
         <html>
@@ -45,5 +51,5 @@ document.getElementById("new").addEventListener("click", () => {
             </body>
         </html>
     `);
-    siteWindow.postMessage(siteFrame.srcdoc, "*");
+    siteWindow.postMessage(await fetchSite(), "*");
 })
