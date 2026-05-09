@@ -303,7 +303,7 @@
                     name: "rotalumE",
                     image: "claw3.png",
                     external: true,
-                    url: "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/claw.html",
+                    url: "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@latest/claw.html",
                     categories: ["old-school", "popular"]
                 },
                 cuttherope: {
@@ -514,7 +514,7 @@
             
             <iframe id="suggestion-form" src="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div id="share-page">
-                <img style="height:50vh;width:50vw;" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/qr.png">
+                <img style="height:50vh;width:50vw;" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@latest/images/icons/qr.png">
             </div>
             <script>
                 const gamesIdList = Object.keys(GAMES);
@@ -531,7 +531,7 @@
                     gameElement.querySelector("a").addEventListener("click", () => {
                         let linkSource = gameInfo.url;
                         if (!gameInfo.external) {
-                            linkSource = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files@main/" + linkSource;
+                            linkSource = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files@latest/" + linkSource;
                         }
                         if (linkSource.includes("cdn.jsdelivr.net")) {
                             fetch(linkSource).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;});
