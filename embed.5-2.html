@@ -447,6 +447,7 @@
                 ultrakill: {
                     name: "Ultrakill",
                     image: "ultrakill.jpg",
+                    targetBlank: true,
                     url: "ultrakill.html",
                     categories: ["other"]
                 },
@@ -535,6 +536,9 @@
                         }
                         if (linkSource.includes("cdn.jsdelivr.net")) {
                             fetch(linkSource).then(response => response.text()).then(response => {window.frameElement.srcdoc = response;});
+                        } else if (gameInfo.targetBlank) {
+                            let gameWindow = window.open("", "_blank");
+                            fetch(linkSource).then(response => response.text()).then(response => {gameWindow.document.write(response);});
                         } else {
                             window.frameElement.removeAttribute("srcdoc");
                             window.frameElement.src = linkSource;
