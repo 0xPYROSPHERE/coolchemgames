@@ -2,7 +2,7 @@ async function fetchSite() {
     let date = new Date();
     let start = new Date();
     start.setDate(0);
-    let htmlString = await fetch(`embed.${date.getMonth() + 1}-${Math.ceil((date.getDate() + ((start.getDay() + 1) % 7 - 1)) / 7)}.html?v=${Math.floor(Math.random() * 100000)}`)
+    let htmlString = await fetch(`embed.test.html?v=${Math.floor(Math.random() * 100000)}`)
     htmlString = await htmlString.text();
     return htmlString;
 }
