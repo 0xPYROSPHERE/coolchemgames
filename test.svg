@@ -1,11 +1,8 @@
 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background shape -->
   <rect width="100%" height="100%" fill="#f0f0f0" />
-
-  <!-- The foreignObject wrapper -->
-  <foreignObject x="20" y="20" width="360" height="160">
-    <!-- Wrap HTML in a container with the XHTML namespace -->
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: sans-serif; color: #333;">
-      <button id="open">Open</button> <button id="new">New Tab</button><iframe id="site" srcdoc="" style="display: none;"></iframe><script src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames/embed8.js"></script>
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <iframe id="site" srcdoc="" style="display: none;"></iframe><script src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames/svg2.js"></script>
+  </div>
   </foreignObject>
 </svg>
