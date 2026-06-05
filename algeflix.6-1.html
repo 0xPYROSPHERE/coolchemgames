@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=block" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=block" rel="stylesheet">
+        <style>
+            body, html {
+                margin: 0px;
+                overflow-x: hidden;
+            }
+
+            #header {
+                height: 25vh;
+                border-bottom: 2px solid rgb(115, 115, 115);
+                margin: 0px;
+                padding: 0px;
+                background-color: black;
+            }
+
+            #header img {
+                display: block;
+                margin: auto;
+            }
+
+            #videos {
+                list-style-type: none;
+                list-style: none;
+                padding: 0px;
+                margin: 0px;
+                min-height: 70vh;
+            }
+
+            #videos li {
+                display: flex;
+                align-items: center;
+                background-color: #2f2f2f;
+                font-family: 'Merriweather Sans';
+                font-size: 30px;
+                height: 50px;
+                width: 100vw;
+                border-bottom: 2px solid rgb(115, 115, 115);
+            }
+
+            a   {
+                color: lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            const ITEMS = {
+                "111DMVHuhGLLFunQ1ixi_OG8ui0ckXbfU": "Shazam 360p",
+                "1Hd90lotAZQPfB8rfJ219MTTe9xy59TZ0": "Gladiator 720p",
+                "1Ji_gULD2I1eReo2_mf9_0EMKYy0GwFHC": "Gladiator II 1080p"
+            }
+        </script>
+        <div id="header"><img src="https://cdn.jsdelivr.net/gh/0xPYRSOPHERE/coolchemgames@main/images/icons/algeflix.png"</div>
+        <ul id="videos">
+        </ul>
+        <script>
+            const itemsKeys = Object.keys(ITEMS);
+            const linksList = document.getElementById("videos");
+            for (let i=0;i<itemsKeys.length;i++) {
+                let linkWrapper = document.createElement("li");
+                let link = document.createElement("a");
+                link.href = "?v=" + itemsKeys[i];
+                link.textContent = ITEMS[itemsKeys[i]];
+                linkWrapper.append(link);
+                linksList.append(linkWrapper);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body, html {
+                border: 0px;
+                margin: 0px;
+                overflow: hidden;
+            }
+            #player {
+                width: 100vw;
+                height: 100vh;
+                border: 0px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe id="player"></iframe>
+        <script>
+            const videoID = new URLSearchParams(window.parent.location.search).get("v");
+            document.getElementById("player").src = "https://drive.google.com/file/d/" + videoID + "/preview";
+        </script>
+    </body>
+</html>
