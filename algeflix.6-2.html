@@ -12,26 +12,27 @@
                 margin: 0px;
                 overflow-x: hidden;
                 height: 100vh;
-                width: 100vw
-            }
-
-            #header {
-                display: block;
-                height: 25vh;
-                border-bottom: 2px solid rgb(115, 115, 115);
-                margin:auto;
+                width: 100vw;
                 background-color: black;
             }
 
-            #header img {
+            #logo {
                 display: block;
-                margin: auto;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 25px;
+                margin-bottom: 25px;
                 width: 10%;
                 aspect-ratio: auto;
             }
 
+            #content {
+                margin: 0;
+                border-top: 2px solid rgb(115, 115, 115);
+            }
+
             #videos {
-                display:inline;
+                display: inline;
                 list-style-type: none;
                 list-style: none;
                 padding: 0px;
@@ -47,6 +48,7 @@
                 height: 50px;
                 width: 100vw;
                 border-bottom: 2px solid rgb(115, 115, 115);
+                border-top: 0;
             }
 
             a   {
@@ -62,9 +64,10 @@
                 "1Ji_gULD2I1eReo2_mf9_0EMKYy0GwFHC": "Gladiator II 1080p"
             }
         </script>
-        <div id="header"><img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/algeflix.png"</div>
-        <ul id="videos">
-        </ul>
+        <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/algeflix.png">
+        <div id="content">
+            <ul id="videos"></ul>
+        </div>
         <script>
             const itemsKeys = Object.keys(ITEMS);
             const linksList = document.getElementById("videos");
