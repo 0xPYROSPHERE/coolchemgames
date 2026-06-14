@@ -40,7 +40,7 @@
                 margin: 0px;
             }
 
-            #videos li {
+            #videos li, #search {
                 display: flex;
                 align-items: center;
                 background-color: #2f2f2f;
@@ -52,8 +52,23 @@
                 border-top: 0;
             }
 
-            a   {
+            a {
                 color: lightgray;
+            }
+
+            #search {
+                padding: 0px;
+                margin: 0px;
+                background-color: #777777;
+                color: rgb(200, 200, 200);
+            }
+
+            #search::placeholder {
+                color: rgb(57, 57, 57);
+            }
+
+            #search::-webkit-search-cancel-button {
+                display: none;
             }
         </style>
     </head>
@@ -69,7 +84,12 @@
                 "1HBuoHhnsrt6EJ8v8ztG0Wsqz_TyqO0sh": "Breaking Bad S1E1",
                 "1GlvnBg-LznD-ZqerQMHRFtdW0apcHt4V": "Breaking Bad S1E2",
                 "1VtfjL71AYUyLexd81k6A1-PLukR2rvWA": "Breaking Bad S1E3",
+                "1PXkjd2eBoKNphaENoMvd9GRjp_6uFgqd": "Breaking Bad S1E4",
+                "1mMd65u2fk6LmAi6ZIoMOvAPmFOimjEFN": "Breaking Bad S1E5",
+                "1TDGs-YS_TEB_0yxp_6VeAOP5uX95Nxvd": "Breaking Bad S1E6",
+                "1akkwcCFt9CYgECdmCUGLQHrqtrzxJ59m": "Breaking Bad S1E7",
                 "1F67gD6R__olzIhow_qVnz5ZMEIp9rGEw": "Deadpool and Wolverine 360p",
+                "1KDDDkhqdiwnoXUw9aYc4WdBfprqPX6pE": "Despicable Me 1080p",
                 "1X9Kflcg0LuRjceV6JghCzs49px8cRTIk": "John Wick 1080p",
                 "1gzsZEVTNEb93tSa0nuzlpR2n20D4Dyx9": "John Wick Chapter 2 1080p",
                 "1CsIZrKGXn557DdOJrdz5ty7nkg0i4CWR": "John Wick Chapter 3 1080p",
@@ -77,15 +97,18 @@
                 "1QyHXXt1T5elfiYmpweIdcHW02PMj19nS": "Stranger Things S1E1",
                 "1vbRvESNCzV8HF7ev0SzcUtKfeFGAkNWP": "Stranger Things S1E2",
                 "1UsxNtlBxGFp955GwEB-s8wYJCA6bXt7e": "Avengers Endgame 1080p",
+                "1Na354rGDbW5gNsDCs1WxufxcsH4PQ14O": "Iron Man 360p",
                 "1f7AlYvxrURwU7138fr2CzyTmN0qK43rp": "Iron Man 3 1080p",
                 "1jucPocCb8aq23Bh-GFLcniAk-k5UU-wC": "Good Burger 720p",
                 "16nP21GFh_p9LNNW59oX2pMmTznKV43K4": "Spider Man Homecoming 720p",
                 "1V3Bq0lrDQUxJay5DDs3gK69ZvRNb1j2u": "Into the Spiderverse 720p",
+                "1Sr-28Ek-KWo6dqB1sHe-TtgKfnS_Qatn": "The Unbelievable Lore of Pregnant Gay Luigi | Bad Art History",
                 "1e4kawCM3CzW04lY4EK0KQpZq6Hv5XG7j": "I am a surgeon"
             }
         </script>
         <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/algeflix.png">
         <div id="content">
+            <input type="search" id="search" placeholder="Search..." incremental>
             <ul id="videos"></ul>
         </div>
         <script>
@@ -99,6 +122,17 @@
                 linkWrapper.append(link);
                 linksList.append(linkWrapper);
             }
+        </script>
+        <script>
+            const searchBar = document.getElementById("search");
+            const searchItems = linksList.children;
+            searchBar.addEventListener("search", () => {
+                let searchValue = searchBar.value.toLowerCase();
+                for (let i=0; i < searchItems.length; i++) {
+                    let searchItem = searchItems[i];
+                    searchItem.style.display = searchItem.querySelector("a").textContent.toLowerCase().includes(searchBar.value) ? "flex" : "none"; 
+                }
+            })
         </script>
     </body>
 </html>
