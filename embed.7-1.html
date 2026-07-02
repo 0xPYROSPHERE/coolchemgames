@@ -5,6 +5,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=block" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/star-empty2.svg" as="image">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/star-filled2.svg" as="image">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/new-tab3.svg" as="image">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=block" rel="stylesheet">
     <head>
         <!-- Google tag (gtag.js) -->
@@ -70,10 +73,39 @@
                 vertical-align: middle;
                 font-family: "Sigmar";
                 font-weight: 400;
-                margin-right: 50px;
+                margin-right: 10px
             }
 
-            #games-list li img {
+            #games-list li .game-options {
+                margin: 0px 0px 0px auto;
+                width: 150px;
+                height: 100%;
+            }
+
+            .star, .new-tab {
+                width: 85px;
+                height: 85px;
+                display: block;
+                margin: auto;
+            }
+
+            .new-tab:hover, .star:hover {
+                cursor: pointer;
+            }
+
+            .star.empty {
+                content: url('https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/star-empty2.svg')
+            }
+
+            .star.filled {
+                content: url('https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/star-filled2.svg')
+            }
+
+            .star:hover {
+                content: url('https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/star-filled2.svg');
+            }
+
+            #games-list li .game-image {
                 vertical-align: middle;
                 height: 300px;
                 width: 400px;
@@ -156,6 +188,14 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+
+            #favorites-empty {
+                display: none;
+                color: lightgrey;
+                font-size: 52px;
+                font-family: "Sigmar";
+                text-align: center;
+            }
         </style>
         <script>
             const CONTEXT = "sites";
@@ -171,7 +211,7 @@
                     image: "subwaysurfers.jpg",
                     external: false,
                     url: "subwaysurfers.html",
-                    categories: ["endless", "mobile"]
+                    categories: ["endless"]
                 },  
                 balatro: {
                     name: "Balatro",
@@ -183,7 +223,7 @@
                     name: "BitLife",
                     image: "bitlife.png",
                     url: "bitlife.html",
-                    categories: ["mobile"]
+                    categories: ["other"]
                 },
                 baldisbasics: {
                     name: "Baldi's Basics",
@@ -195,13 +235,19 @@
                     name: "Slow Roads",
                     image: "slowroads.jpg",
                     url: "slowroads.html",
-                    categories: ["popular", "endless"]
+                    categories: ["popular", "endless", "driving"]
                 },
                 slots: {
                     name: "Slots",
                     image: "slots.png",
                     url: "slots.html",
                     categories: ["casino"]
+                },
+                flappybird: {
+                    name: "Flappy Bird",
+                    image: "flappybird.jpg",
+                    url: "flappybird.html",
+                    categories: ["endless"]
                 },
                 lasthorizon: {
                     name: "Last Horizon",
@@ -213,7 +259,7 @@
                     name: "Angry Birds",
                     image: "angrybirds.jpg",
                     url: "angrybirds2.html",
-                    categories: ["mobile", "puzzle"]
+                    categories: ["puzzle"]
                 },
                 pvz: {
                     name: "Plants vs. Zombies",
@@ -221,11 +267,23 @@
                     url: "pvz.html",
                     categories: ["strategy"]
                 },
+                crossyroad: {
+                    name: "Crossy Road",
+                    image: "crossyroad.jpg",
+                    url: "crossyroad.html",
+                    categories: ["endless"]
+                },
                 openfront: {
                     name: "OpenFront.io",
                     image: "openfront.jpg",
                     url: "openfront.html",
                     categories: ["popular", "strategy"]
+                },
+                tombofthemask: {
+                    name: "Tomb of the Mask",
+                    image: "tombofthemask.webp",
+                    url: "tombofthemask.html",
+                    categories: ["puzzle"]
                 },
                 raft: {
                     name: "Raft",
@@ -233,11 +291,23 @@
                     url: "raft.fix.html",
                     categories: ["other"]
                 },
+                highwaytraffic: {
+                    name: "Highway Traffic",
+                    image: "highwaytraffic.png",
+                    url: "highwaytraffic.html",
+                    categories: ["driving", "endless"]
+                },
                 tetris: {
                     name: "Tetris",
                     image: "tetris.jpg",
                     url: "tetris.html",
                     categories: ["flash", "puzzle"]
+                },
+                vicecity: {
+                    name: "GTA: Vice City",
+                    image: "vicecity.jpg",
+                    url: "vicecity.html",
+                    categories: ["old-school"]
                 },
                 tboi: {
                     name: "The Binding of Isaac",
@@ -261,7 +331,7 @@
                     name: "Temple Run",
                     image: "templerun2.png",
                     url: "templerun2.fix.html",
-                    categories: ["mobile", "endless"]
+                    categories: ["endless"]
                 },
                 "eaglercraft-1.12.2": {
                     name: "Eaglercraft",
@@ -269,23 +339,41 @@
                     url: "eaglercraft2.html",
                     categories: ["popular"]
                 },
+                crazycattle: {
+                    name: "Crazy Cattle 3D",
+                    image: "crazycattle.png",
+                    url: "crazycattle.html",
+                    categories: ["other"]
+                },
                 retrobowl: {
                     name: "Retro Bowl",
                     image: "retrobowl.jpg",
                     url: "retrobowl.html",
-                    categories: ["mobile", "sports"]
+                    categories: ["sports"]
+                },
+                driftking: {
+                    name: "Drift King",
+                    image: "driftking.jpeg",
+                    url: "driftking.html",
+                    categories: ["driving"]
                 },
                 granny: {
                     name: "Granny",
                     image: "granny.jpg",
                     url: "granny.html",
-                    categories: ["horror", "mobile", "popular"]
+                    categories: ["horror", "popular"]
                 },
                 granny2: {
                     name: "Granny: Chapter Two",
                     image: "granny2.jpg",
                     url: "granny2.html",
-                    categories: ["horror", "mobile"]
+                    categories: ["horror"]
+                },
+                polytrack: {
+                    name: "PolyTrack",
+                    image: "polytrack.jpg",
+                    url: "polytrack.html",
+                    categories: ["driving"]
                 },
                 fnae: {
                     name: "Five Nights At Epstein's",
@@ -297,7 +385,7 @@
                     name: "Geometry Dash",
                     image: "gd.png",
                     url: "geometrydash.html",
-                    categories: ["popular", "mobile"]
+                    categories: ["popular"]
                 },
                 buckshotroulette: {
                     name: "Buckshot Roulette",
@@ -321,13 +409,13 @@
                     name: "Geometry Dash SubZero",
                     image: "gdsubzero2.png",
                     url: "gdsubzero.html",
-                    categories: ["mobile"]
+                    categories: ["other"]
                 },
                 dumbwaystodie: {
                     name: "Dumb Ways to Die",
                     image: "dumbwaystodie2.png",
                     url: "dumbwaystodie.html",
-                    categories: ["endless", "mobile", "flash"]
+                    categories: ["endless", "flash"]
                 },
                 claw: {
                     name: "rotalumE",
@@ -340,7 +428,7 @@
                     name: "Cut the Rope",
                     image: "cuttherope.jpg",
                     url: "cuttherope.fix.html",
-                    categories: ["mobile", "puzzle"]
+                    categories: ["puzzle"]
                 },
                 basketrandom: {
                     name: "Basket Random",
@@ -382,13 +470,19 @@
                     name: "Where's My Water?",
                     image: "wheresmywater.jpg",
                     url: "wheresmywater.html",
-                    categories: ["mobile", "puzzle"]
+                    categories: ["puzzle"]
+                },
+                burnoutcity: {
+                    name: "Burnout City",
+                    image: "burnoutcity.png",
+                    url: "burnoutcity.html",
+                    categories: ["driving"]
                 },
                 blockblast: {
                     name: "Block Blast",
                     image: "blockblast.png",
                     url: "blockblast2.html",
-                    categories: ["mobile", "puzzle"]
+                    categories: ["puzzle"]
                 },
                 baseballbros: {
                     name: "Baseball Bros",
@@ -533,6 +627,19 @@
                 } 
             }
         </script>
+        <script>
+            var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+            function addFavorite(name) {
+                favorites.push(name);
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+            }
+
+            function removeFavorite(name) {
+                favorites = favorites.filter(item => item != name);
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+            }
+        </script>
     </head>
     <body>
         <div id="wrapper">
@@ -542,6 +649,7 @@
                     <li id="nav-share">Share</li>
                     <li id="nav-random">Random Game</li>
                     <li class="selected" id="nav-all">All Games</li>
+                    <li id="nav-favorites">Favorites</li>
                     <li id="nav-popular">Popular</li>
                     <li id="nav-horror">Horror</li>
                     <li id="nav-endless">Endless</li>
@@ -549,8 +657,8 @@
                     <li id="nav-puzzle">Puzzle</li>
                     <li id="nav-strategy">Strategy</li>
                     <li id="nav-old-school">Old School</li>
+                    <li id="nav-driving">Driving</li>
                     <li id="nav-sports">Sports</li>
-                    <li id="nav-mobile">Mobile</li>
                     <li id="nav-flash">Flash</li>
                     <li id="nav-casino">Casino</li>
                     <li id="nav-other">Other</li>
@@ -560,14 +668,22 @@
             </aside>
             <div id="games-panel">
                 <input type="search" id="search" placeholder="Search all games..." incremental>
-                <ul id="games-list"></ul>    
+                <ul id="games-list"></ul>
+                <div id="favorites-empty">Click the stars to add games here</div>    
             </div>
             
             <iframe id="suggestion-form" src="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div id="share-page">
-                <img width="500" height="500" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@latest/images/icons/qr2.png">
+                <img width="350" height="350" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@latest/images/icons/qr2.png">
             </div>
             <script>
+                function resolveLink(game) {
+                    if (!game.external) {
+                        return "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files@latest/" + game.url;
+                    } else {
+                        return game.url;
+                    }
+                }
                 const gamesIdList = Object.keys(GAMES);
                 const gamesListElement = document.getElementById("games-list");
                 for (let i=0; i<gamesIdList.length; i++) {
@@ -575,19 +691,78 @@
                     let gameElement = document.createElement("li");
                     gameElement.id = gameId;
                     let gameInfo = GAMES[gameId];
+                    let inFavorites = favorites.includes(gameId);
                     gameElement.innerHTML = `
-                        <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/${gameInfo.image}">
+                        <img class="game-image" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/games/${gameInfo.image}">
                         <a>${gameInfo.name}</a>
+                        <div class="game-options">
+                            <img class="star ${inFavorites ? "filled" : "empty"}" title="${inFavorites ? "Remove from favorites" : "Add to favorites"}">
+                            <img class="new-tab" title="Open in new tab" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/new-tab3.svg"> 
+                        </div>
                     `
+                    let favoriteIcon = gameElement.querySelector(".star");
+                    favoriteIcon.addEventListener("click", () => {
+                        if (!favorites.includes(gameId)) {
+                            favoriteIcon.classList.remove("empty");
+                            favoriteIcon.classList.add("filled");
+                            favoriteIcon.title = "Remove from favorites";
+                            addFavorite(gameId);
+                        } else {
+                            favoriteIcon.classList.remove("filled");
+                            favoriteIcon.classList.add("empty");
+                            favoriteIcon.title = "Add to favorites";
+                            removeFavorite(gameId);
+                        }
+                    });
+                    gameElement.querySelector(".new-tab").addEventListener("click", () => {
+                        let linkSource = resolveLink(gameInfo);
+                        let template = `
+                            <!DOCTYPE html>
+                            <html>
+                                <head>
+                                    <title>New Tab</title>
+                                    <style>
+                                        body, html {
+                                            margin: 0;
+                                            padding: 0;
+                                            height: 100%;
+                                            width: 100%;
+                                            overflow: hidden;
+                                        }
+                                        #game {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100%;
+                                            height: 100%;
+                                            border: none;
+                                        }
+                                    </style>
+                                </head>
+                                <body>
+                                    <iframe id="game"></iframe>
+                                </body>
+                            </html>
+                        `;
+                        if (linkSource.includes("cdn.jsdelivr.net")) {
+                            fetch(linkSource).then(response => response.text()).then(response => {
+                                let gameWindow = window.open("", "_blank");
+                                gameWindow.document.write(template);
+                                gameWindow.document.getElementById("game").srcdoc = response;
+                            });
+                        } else {
+                            let gameWindow = window.open("", "_blank");
+                            gameWindow.document.write(template);
+                            gameWindow.document.getElementById("game").src = linkSource;  
+                        }
+                        
+                    })
                     gameElement.querySelector("a").addEventListener("click", () => {
                         gtag("event", "page_view", {
                             page_title: gameInfo.name,
                             page_location: "/" + gameId
                         });
-                        let linkSource = gameInfo.url;
-                        if (!gameInfo.external) {
-                            linkSource = "https://cdn.jsdelivr.net/gh/0xPYROSPHERE/ccg-files@latest/" + linkSource;
-                        }
+                        let linkSource = resolveLink(gameInfo);
                         if (linkSource.includes("cdn.jsdelivr.net")) {
                             fetch(linkSource).then(response => response.text()).then(response => {
                                 if (!gameInfo.targetBlank) {
@@ -628,29 +803,44 @@
                     })
                 }
 
+                const gamesPanel = document.getElementById("games-panel");
+                const sharePage = document.getElementById("share-page");
+                const suggestionForm = document.getElementById("suggestion-form");
+                const favoritesEmpty = document.getElementById("favorites-empty");
+
                 function updateList() {
+                    favoritesEmpty.style.display = "none";
                     if (currentTab == "suggest-games") {
-                        document.getElementById("games-panel").style.display = "none";
-                        document.getElementById("share-page").style.display = "none";
-                        document.getElementById("suggestion-form").style.display = "block";
+                        gamesPanel.style.display = "none";
+                        sharePage.style.display = "none";
+                        suggestionForm.style.display = "block";
                     } else if (currentTab == "share") {
-                        document.getElementById("games-panel").style.display = "none";
-                        document.getElementById("suggestion-form").style.display = "none";
-                        document.getElementById("share-page").style.display = "block";
-                        if (CONTEXT == "sites") {
-                            document.getElementById("sites-link").style.display = "none";
-                        }   
+                        gamesPanel.style.display = "none";
+                        suggestionForm.style.display = "none";
+                        sharePage.style.display = "block";
                     } else {
                         searchBar.placeholder = `Search ${document.getElementById("nav-" + currentTab).textContent.toLowerCase()}...`;
                         let gamesList = document.getElementById("games-list");
-                        document.getElementById("games-panel").style.display = "block";
-                        document.getElementById("suggestion-form").style.display = "none";
-                        document.getElementById("share-page").style.display = "none";
-                        document.getElementById("games-panel").scrollTo(0, 0);
+                        gamesPanel.style.display = "block";
+                        suggestionForm.style.display = "none";
+                        sharePage.style.display = "none";
+                        gamesPanel.scrollTo(0, 0);
                         let gameItems = gamesList.children;
                         if (currentTab == "all") {
                             for (let i=0; i<gameItems.length; i++) {
                                 gameItems[i].style.display = "flex";
+                            }
+                        } else if (currentTab == "favorites") {
+                            for (let i=0; i<gameItems.length; i++) {
+                                let gameItem = gameItems[i];
+                                if (favorites.includes(gameItem.id)) {
+                                    gameItem.style.display = "flex";
+                                } else {
+                                    gameItem.style.display = "none";
+                                }
+                            }
+                            if (favorites.length == 0) {
+                                favoritesEmpty.style.display = "block";
                             }
                         } else {
                             for (let i=0; i<gameItems.length; i++) {
@@ -669,6 +859,7 @@
             <script>
                 var searchBar = document.getElementById("search");
                 searchBar.addEventListener("search", () => {
+                    gamesPanel.scrollTo(0, 0);
                     search(searchBar.value);
                 })
 
@@ -678,7 +869,7 @@
                     for (let i=0; i<gameItems.length; i++) {
                         let gameItem = gameItems[i];
                         let gameObject = GAMES[gameItem.id];
-                        if (currentTab == "all" || gameObject.categories.includes(currentTab)) {
+                        if (currentTab == "all" || (currentTab == "favorites" && favorites.includes(gameItem.id)) || gameObject.categories.includes(currentTab)) {
                             let gameName = gameObject.name.toLowerCase();
                             gameItem.style.display = gameName.includes(searchQuery) ? "flex" : "none";
                         }
