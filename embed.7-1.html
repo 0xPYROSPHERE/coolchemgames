@@ -61,7 +61,6 @@
                 align-items: center;
                 border-bottom: 3px solid gray;
                 padding-top: 0px;
-                padding-right: 0px;
                 overflow: auto;
             }
 
@@ -70,15 +69,14 @@
                 vertical-align: middle;
                 color: yellow;
                 font-size: 40px;
-                vertical-align: middle;
                 font-family: "Sigmar";
                 font-weight: 400;
-                margin-right: 10px
+                width: 70%
             }
 
             #games-list li .game-options {
                 margin: 0px 0px 0px auto;
-                width: 150px;
+                width: 30%;
                 height: 100%;
             }
 
@@ -482,7 +480,7 @@
                     name: "Block Blast",
                     image: "blockblast.png",
                     url: "blockblast2.html",
-                    categories: ["puzzle"]
+                    categories: ["puzzle", "endless"]
                 },
                 baseballbros: {
                     name: "Baseball Bros",
@@ -628,16 +626,16 @@
             }
         </script>
         <script>
-            var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            var favorites = JSON.parse(localStorage.getItem("ccg-favorites")) || [];
 
             function addFavorite(name) {
                 favorites.push(name);
-                localStorage.setItem("favorites", JSON.stringify(favorites));
+                localStorage.setItem("ccg-favorites", JSON.stringify(favorites));
             }
 
             function removeFavorite(name) {
                 favorites = favorites.filter(item => item != name);
-                localStorage.setItem("favorites", JSON.stringify(favorites));
+                localStorage.setItem("ccg-favorites", JSON.stringify(favorites));
             }
         </script>
     </head>
