@@ -4,7 +4,7 @@
 "productVersion": "2.0.94",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm",
-"wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
+"wasmFrameworkUrl": "WebGL2.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
