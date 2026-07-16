@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Bronze Age</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json", {onProgress: UnityProgress});
+	  var gameInstance = unityInstance;
+    </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <style>
+    body, html {
+      margin: 0px;
+      overflow: hidden;
+      height: 100%;
+      width: 100%
+    }
+  </style>
+<script>
+    function triggerAdBreak() {
+        return;
+    }
+</script>
+
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 100vw; height: 100vh; position: absolute; top: 0; left: 0;"></div>
+    </div>
+  </body>
+</html>
