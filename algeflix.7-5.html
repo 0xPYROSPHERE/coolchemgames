@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base target="_parent">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=block" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=block" rel="stylesheet">
+        <style>
+            body, html {
+                margin: 0px;
+                overflow-x: hidden;
+                height: 100vh;
+                width: 100vw;
+                background-color: black;
+            }
+
+            #logo {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 25px;
+                margin-bottom: 25px;
+                width: 10%;
+                aspect-ratio: auto;
+            }
+
+            #content {
+                margin: 0;
+                border-top: 2px solid rgb(115, 115, 115);
+            }
+
+            #videos {
+                display: inline;
+                padding: 0px;
+                margin: 0px;
+                user-select: none;
+            }
+
+            #videos a, #videos summary, #search {
+                display: flex;
+                align-items: center;
+                font-family: 'Merriweather Sans';
+                font-size: 30px;
+                height: 50px;
+                width: 100vw;
+                border-bottom: 2px solid rgb(115, 115, 115);
+                border-top: 0;
+                padding-left: 15px;
+                text-decoration: none;
+            }
+            
+            #videos details a {
+                background-color: #777777;
+                color: rgb(200, 200, 200);
+                border-bottom-color: black;
+                padding-left: 60px;
+            }
+
+            #videos details a:hover {
+                background-color: #2f2f2f;
+            }
+
+            #videos a, summary {
+                background-color: #2f2f2f;
+                color: lightgray;
+                cursor: pointer;
+            }
+
+            #videos a:hover {
+                background-color: #777777;
+            }
+
+            summary::before {
+                content: "[+] ";
+                margin-right: 10px
+            }
+
+            details[open] summary::before {
+                content: "[-] "
+            }
+
+            #search {
+                margin: 0px;
+                background-color: #777777;
+                color: rgb(200, 200, 200);
+            }
+
+            #search::placeholder {
+                color: rgb(57, 57, 57);
+            }
+
+            #search::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            const ITEMS = {
+                standalone: [
+                    {name: "Shazam 360p", id: "111DMVHuhGLLFunQ1ixi_OG8ui0ckXbfU"},
+                    {name: "Black Panther 720p", id: "1GdMksUpH7ghCBF1j4sEmJU9hmZ3pPpkn"},
+                    {name: "Batman Begins 720p", id: "1P5bcnPcqesIX7WbYbD-gjC1HyXoWZGIM"},
+                    {name: "The Dark Knight 720p", id: "199TEi-fAhDzAeaICw-vIj6V0ryYiZnq6"},
+                    {name: "The Dark Knight Rises 720p", id: "1gLedvzm2IGQRABj8-qXtCD1IfOdf5UdP"},
+                    {name: "Shrek 1080p", id: "1NezVaMIuVH1Gt0cHCQMT3JeJu7JuxlIG"},
+                    {name: "Deadpool and Wolverine 360p", id: "1F67gD6R__olzIhow_qVnz5ZMEIp9rGEw"},
+                    {name: "Despicable Me 1080p", id: "1KDDDkhqdiwnoXUw9aYc4WdBfprqPX6pE"},
+                    {name: "John Wick 1080p", id: "1X9Kflcg0LuRjceV6JghCzs49px8cRTIk"},
+                    {name: "John Wick Chapter 2 1080p", id: "1gzsZEVTNEb93tSa0nuzlpR2n20D4Dyx9"},
+                    {name: "John Wick Chapter 3 1080p", id: "1CsIZrKGXn557DdOJrdz5ty7nkg0i4CWR"},
+                    {name: "John Wick Chapter 4 1080p", id: "10LUlcX6Hu9pn3c3xmPlfJOf20Qjwgxq_"},
+                    {name: "Stranger Things S1E1", id: "1QyHXXt1T5elfiYmpweIdcHW02PMj19nS"},
+                    {name: "Stranger Things S1E2", id: "1vbRvESNCzV8HF7ev0SzcUtKfeFGAkNWP"},
+                    {name: "Avengers Endgame 1080p", id: "1UsxNtlBxGFp955GwEB-s8wYJCA6bXt7e"},
+                    {name: "Iron Man 360p", id: "1Na354rGDbW5gNsDCs1WxufxcsH4PQ14O"},
+                    {name: "Iron Man 3 1080p", id: "1f7AlYvxrURwU7138fr2CzyTmN0qK43rp"},
+                    {name: "Good Burger 720p", id: "1jucPocCb8aq23Bh-GFLcniAk-k5UU-wC"},
+                    {name: "Spider Man Homecoming 720p", id: "16nP21GFh_p9LNNW59oX2pMmTznKV43K4"},
+                    {name: "Into the Spiderverse 720p", id: "1V3Bq0lrDQUxJay5DDs3gK69ZvRNb1j2u"},
+                    {name: "The Unbelievable Lore of Pregnant Gay Luigi | Bad Art History", id: "1Sr-28Ek-KWo6dqB1sHe-TtgKfnS_Qatn"},
+                    {name: "I am a surgeon", id: "1e4kawCM3CzW04lY4EK0KQpZq6Hv5XG7j"}
+                ],
+                series: [
+                    {
+                        name: "Breaking Bad",
+                        items: [
+                            {name: "S1E1 Pilot", id: "1HBuoHhnsrt6EJ8v8ztG0Wsqz_TyqO0sh"},
+                            {name: "S1E2 Cat's in the Bag...", id: "1GlvnBg-LznD-ZqerQMHRFtdW0apcHt4V"},
+                            {name: "S1E3 ...And the Bag's in the River", id: "1VtfjL71AYUyLexd81k6A1-PLukR2rvWA"},
+                            {name: "S1E4 Cancer Man", id: "1PXkjd2eBoKNphaENoMvd9GRjp_6uFgqd"},
+                            {name: "S1E5 Gray Matter", id: "1mMd65u2fk6LmAi6ZIoMOvAPmFOimjEFN"},
+                            {name: "S1E6 Crazy Handful of Nothin'", id: "1TDGs-YS_TEB_0yxp_6VeAOP5uX95Nxvd"},
+                            {name: "S1E7 A No-Rough-Stuff-Type Deal", id: "1akkwcCFt9CYgECdmCUGLQHrqtrzxJ59m"}
+                        ]
+                    }
+                ]
+            }
+        </script>
+        <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/algeflix.png">
+        <div id="content">
+            <input type="search" id="search" placeholder="Search..." incremental>
+            <div id="videos"></div>
+        </div>
+        <script>
+            function insertLinks(container, itemList) {
+                for (let i=0;i<itemList.length;i++) {
+                    let link = document.createElement("a");
+                    link.href = "?v=" + itemList[i].id;
+                    link.textContent = itemList[i].name;
+                    container.append(link);
+                }  
+            }
+            const linksList = document.getElementById("videos");
+
+            for (let i=0; i<ITEMS.series.length; i++) {
+                let series = ITEMS.series[i];
+                let detailsElement = document.createElement("details");
+                detailsElement.innerHTML = `<summary>${series.name}</summary`;
+                insertLinks(detailsElement, series.items);
+                linksList.append(detailsElement);
+            }
+
+            insertLinks(linksList, ITEMS.standalone);
+        </script>
+        <script>
+            const searchBar = document.getElementById("search");
+            const searchLinks = linksList.querySelectorAll("a");
+            const searchCategories = linksList.querySelectorAll("summary");
+            searchBar.addEventListener("search", () => {
+                let searchValue = searchBar.value.toLowerCase();
+                for (let i=0; i<searchLinks.length; i++) {
+                    let searchLink = searchLinks[i];
+                    if (searchLink.parentElement.id == "videos") {
+                        searchLink.style.display = searchLink.textContent.toLowerCase().includes(searchValue) ? "flex" : "none";
+                    }
+                }
+                for (let i=0; i<searchCategories.length; i++) {
+                    let categorySummary = searchCategories[i];
+                    let searchCategory = categorySummary.parentElement;
+                    let shouldShow = false;
+                    let itemLinks = searchCategory.querySelectorAll("a");
+                    for (let i=0; i<itemLinks.length; i++) {
+                        if (itemLinks[i].textContent.toLowerCase().includes(searchValue)) {
+                            shouldShow = true;
+                            break;
+                        }
+                    }
+                    if (categorySummary.textContent.toLowerCase().includes(searchValue)) {
+                        shouldShow = true;
+                    }
+                    searchCategory.style.display = shouldShow ? "block" : "none"; 
+                }
+            })
+        </script>
+    </body>
+</html>
