@@ -4,7 +4,7 @@
         <div xmlns="http://www.w3.org/1999/xhtml">
             <iframe id="site" srcdoc="" style="width:100vw;height:100vh;border:0px;"></iframe>
             <script type="text/javascript">
-                fetch("https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/xp/VirtualXP6.html")
+                fetch("https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/xp/VirtualXP7.html")
                     .then(response => response.text())
                     .then(textSrc => {document.getElementById("site").srcdoc = textSrc;});
             </script>

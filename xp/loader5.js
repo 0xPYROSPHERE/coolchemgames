@@ -136,24 +136,5 @@ window.addEventListener("load", function()
     document.addEventListener("keydown",function(e){blockSpecialKeys(e)});
     document.addEventListener("keypress",function(e){blockSpecialKeys(e)});
     document.addEventListener("keyup", function(e){blockSpecialKeys(e)});
-
-    // CHECKING IF IS NOT RUNNING WITHIN AN IFRAME
-    if (window.top == window.self)
-        {
-        // REQUESTING THE ISO IMAGE
-        getISOImage();
-        }
+    getISOImage();
     });
-
-if ("serviceWorker" in navigator)
-    {
-    navigator.serviceWorker.register("/gh/0xPYROSPHERE/coolchemgames@main/xp/worker2.js").then(function(registration)
-        {
-        // Registration successful
-        //console.log("ServiceWorker registration successful with scope: " + registration.scope);
-        }).catch(function(err)
-        {
-        // Registration failed
-        //console.log("ServiceWorker registration failed: " + err);
-        });
-    }
