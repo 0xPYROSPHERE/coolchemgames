@@ -147,7 +147,7 @@ window.addEventListener("load", function()
 
 if ("serviceWorker" in navigator)
     {
-    navigator.serviceWorker.register("worker.js").then(function(registration)
+    navigator.serviceWorker.register("/gh/0xPYROSPHERE/coolchemgames@main/xp/worker.js").then(function(registration)
         {
         // Registration successful
         //console.log("ServiceWorker registration successful with scope: " + registration.scope);
