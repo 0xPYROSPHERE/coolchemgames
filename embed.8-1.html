@@ -648,7 +648,7 @@
                     name: "Pre-Civilization: Bronze Age",
                     image: "pcbronzeage.jpg",
                     url: "pcbronzeage.html",
-                    categories: ["flash", "strategy"]
+                    categories: ["strategy"]
                 },
                 wheresmywater: {
                     name: "Where's My Water?",
@@ -956,21 +956,22 @@
                                 </head>
                                 <body>
                                     <iframe id="game"></iframe>
+                                    <script>
+                                        const gameFrame = document.getElementById("game");
+                                        const linkSource = "${linkSource}";
+                                        if (linkSource.includes("cdn.jsdelivr.net")) {
+                                            fetch(linkSource).then(response => response.text()).then(response => {
+                                                gameFrame.srcdoc = response;
+                                            });
+                                        } else {
+                                            gameFrame.src = linkSource;  
+                                        }
+                                    <\/script>
                                 </body>
                             </html>
                         `;
-                        if (linkSource.includes("cdn.jsdelivr.net")) {
-                            fetch(linkSource).then(response => response.text()).then(response => {
-                                let gameWindow = window.open("", "_blank");
-                                gameWindow.document.write(template);
-                                gameWindow.document.getElementById("game").srcdoc = response;
-                            });
-                        } else {
-                            let gameWindow = window.open("", "_blank");
-                            gameWindow.document.write(template);
-                            gameWindow.document.getElementById("game").src = linkSource;  
-                        }
-                        
+                        let gameWindow = window.open("", "_blank");
+                        gameWindow.document.write(template);
                     })
                     gameElement.querySelector("a").addEventListener("click", () => {
                         gtag("event", "page_view", {
