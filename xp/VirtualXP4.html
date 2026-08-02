@@ -46,10 +46,11 @@
 
 		<script src="VirtualXPLoader.js"></script>
 		<script>
+			var isoUrl;
 			fetch("/gh/0xPYROSPHERE/coolchemgames@main/xp/VirtualXP.iso")
 				.then(response => response.blob())
 				.then(isoBlob => {
-					var isoUrl = URL.createObjectURL(isoBlob);
+					isoUrl = URL.createObjectURL(isoBlob);
 					const loaderScript = document.createElement("script");
 					loaderScript.src = "/gh/0xPYROSPHERE/coolchemgames@main/xp/loader2.js";
 					document.body.append(loaderScript);
