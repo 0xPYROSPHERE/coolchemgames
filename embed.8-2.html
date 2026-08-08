@@ -81,8 +81,8 @@
             }
 
             .star, .new-tab {
-                width: 85px;
-                height: 85px;
+                width: 75px;
+                height: 75px;
                 display: block;
                 margin: auto;
             }
@@ -923,7 +923,6 @@
                 ultrakill: {
                     name: "Ultrakill",
                     image: "ultrakill.jpg",
-                    targetBlank: true,
                     url: "ultrakill.fix.html",
                     categories: ["other"]
                 },
@@ -1094,10 +1093,12 @@
                         });
                         let linkSource = resolveLink(gameInfo);
                         if (linkSource.includes("cdn.jsdelivr.net")) {
+                            document.body.style.opacity = 0;
                             fetch(linkSource).then(response => response.text()).then(response => {
                                 if (!gameInfo.targetBlank) {
                                     window.frameElement.srcdoc = response;
                                 } else {
+                                    document.body.style.opacity = 1;
                                     let gameWindow = window.open("", "_blank");
                                     gameWindow.document.write(response);
                                 }
