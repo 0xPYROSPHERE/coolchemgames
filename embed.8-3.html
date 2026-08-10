@@ -10,18 +10,6 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/new-tab3.svg" as="image">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=block" rel="stylesheet">
     <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TVCYD326J"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-4TVCYD326J', {
-            'page-title': "Home",
-            'page-location': "/"
-        });
-        </script>
         <style>
             body {
                 background-color: #36344e;
@@ -357,6 +345,12 @@
                 angrybirds: {
                     name: "Angry Birds",
                     image: "angrybirds.jpg",
+                    url: "angrybirds.html",
+                    categories: ["puzzle"]
+                },
+                angrybirds2: {
+                    name: "Angry Birds 2",
+                    image: "angrybirds2.jpg",
                     url: "angrybirds2.html",
                     categories: ["puzzle"]
                 },
@@ -376,6 +370,30 @@
                     name: "Big Tower Tiny Square",
                     image: "btts.jpg",
                     url: "btts.html",
+                    categories: ["platformer"]
+                },
+                bttsice: {
+                    name: "Big Ice Tower Tiny Square",
+                    image: "bttsice.jpg",
+                    url: "bttsice.html",
+                    categories: ["platformer"]
+                },
+                bttsneon: {
+                    name: "Big Neon Tower Tiny Square",
+                    image: "bttsneon.jpg",
+                    url: "bttsneon.jpg",
+                    categories: ["platformer"]
+                },
+                bttsflappy: {
+                    name: "Big Flappy Tower Tiny Square",
+                    image: "bttsflappy.jpg",
+                    url: "bttsflappy.html",
+                    categories: ["platformer"]
+                },
+                btts2: {
+                    name: "Big Tower Tiny Square 2",
+                    image: "btts2.jpg",
+                    url: "btts2.html",
                     categories: ["platformer"]
                 },
                 templerun2: {
@@ -419,6 +437,12 @@
                     image: "parkingfury3.jpg",
                     url: "parkingfury3.html",
                     categories: ["driving"]
+                },
+                golfinvaders: {
+                    name: "Golf Invaders",
+                    image: "golfinvaders.png",
+                    url: "golfinvaders.html",
+                    categories: ["other"]
                 },
                 retrobowl: {
                     name: "Retro Bowl",
@@ -491,6 +515,12 @@
                     image: "bobtherobber.jpg",
                     url: "bobtherobber.html",
                     categories: ["puzzle"]
+                },
+                gladihoppers: {
+                    name: "Gladihoppers",
+                    image: "gladihoppers.jpg",
+                    url: "gladihoppers.html",
+                    categories: ["other"]
                 },
                 roulette: {
                     name: "Roulette",
@@ -649,6 +679,12 @@
                     url: "rooftopsnipers2.html",
                     categories: ["multiplayer"]
                 },
+                clusterrush: {
+                    name: "Cluster Rush",
+                    image: "clusterrush.webp",
+                    url: "clusterrush.html",
+                    categories: ["platformer"]
+                },
                 littlealchemy1: {
                     name: "Little Alchemy",
                     image: "littlealchemy1.png",
@@ -775,6 +811,30 @@
                     url: "quake3arena2.html",
                     categories: ["old-school"]
                 },
+                twhg1: {
+                    name: "The World's Hardest Game",
+                    image: "twhg1.png",
+                    url: "twhg1.html",
+                    categories: ["flash"]
+                },
+                twhg2: {
+                    name: "The World's Hardest Game 2",
+                    image: "twhg2.png",
+                    url: "twhg2.html",
+                    categories: ["flash"]
+                },
+                twhg3: {
+                    name: "The World's Hardest Game 3",
+                    image: "twhg3.png",
+                    url: "twhg3.html",
+                    categories: ["other"]
+                },
+                twhg4: {
+                    name: "The World's Hardest Game 4",
+                    image: "twhg4.png",
+                    url: "twhg4.html",
+                    categories: ["other"]
+                },
                 fnaf1: {
                     name: "Five Nights at Freddy's",
                     image: "fnaf1.png",
@@ -798,6 +858,18 @@
                     image: "fnaf4.png",
                     url: "fnaf4.html",
                     categories: ["horror"]
+                },
+                qwop: {
+                    name: "QWOP",
+                    image: "qwop.png",
+                    url: "qwop.html",
+                    categories: ["flash", "sports"]
+                },
+                thereisnogame: {
+                    name: "There Is No Game",
+                    image: "thereisnogame.png",
+                    url: "thereisnogame.html",
+                    categories: ["puzzle"]
                 },
                 backrooms: {
                     name: "Backrooms",
@@ -919,6 +991,12 @@
                     url: "ducklife7.html",
                     categories: ["duck-life"]
                 },
+                frogfractions: {
+                    name: "Frog Fractions",
+                    image: "frogfractions.png",
+                    url: "frogfractions.html",
+                    categories: ["flash"]
+                },
                 coreball: {
                     name: "Coreball",
                     image: "coreball.png",
@@ -957,6 +1035,13 @@
                     url: "https://fritz.chessbase.com/en/Fritz",
                     categories: ["strategy"]
                 } 
+            }
+
+            function sendView(id) {
+                window.parent.gtag("event", "page_view", {
+                    page_title: GAMES[id].name,
+                    page_location: "/" + id
+                });
             }
         </script>
         <script>
@@ -1048,6 +1133,7 @@
                         }
                     });
                     gameElement.querySelector(".new-tab").addEventListener("click", () => {
+                        sendView(gameId);
                         let linkSource = resolveLink(gameInfo);
                         let template = `
                             <!DOCTYPE html>
@@ -1092,10 +1178,7 @@
                         gameWindow.document.write(template);
                     })
                     gameElement.querySelector("a").addEventListener("click", () => {
-                        gtag("event", "page_view", {
-                            page_title: gameInfo.name,
-                            page_location: "/" + gameId
-                        });
+                        sendView(gameId);
                         let linkSource = resolveLink(gameInfo);
                         if (linkSource.includes("cdn.jsdelivr.net")) {
                             document.body.classList.add("loading");
