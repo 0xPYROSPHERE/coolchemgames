@@ -226,7 +226,7 @@
             const romSelect = document.getElementById("rom-select");
             romSelect.addEventListener("change", () => {
                 const romId = romSelect.value;
-                fetch(baseUrl + "claw/index.v10.json")
+                fetch(baseUrl + "claw/index.v11.json")
                     .then((response) => {return response.json();})
                     .then((data) => {
                             buildRom(data[romId]);

@@ -1,0 +1,232 @@
+{
+    "aa": {
+        "title": "Call of Duty: Black Ops",
+        "system": "nds",
+        "chunks": 3
+    },
+    "af": {
+        "title": "Call of Duty: Modern Warfare",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ag": {
+        "title": "Call of Duty: Modern Warfare: Mobilized",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ad": {
+        "title": "Call of Duty: Modern Warfare 3 - Defiance",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ah": {
+        "title": "Call of Duty: World at War",
+        "system": "nds",
+        "chunks": 3
+    },
+    "ai": {
+        "title": "Tony Hawk's Pro Skater",
+        "system": "psx",
+        "chunks": 18
+    },
+    "aj": {
+        "title": "Tony Hawk's Pro Skater 2",
+        "system": "psx",
+        "chunks": 24
+    },
+    "ak": {
+        "title": "Final Fantasy VI Advance",
+        "system": "gba",
+        "chunks": 1
+    },
+    "al": {
+        "title": "Hong Kong '97",
+        "system": "snes",
+        "chunks": 1
+    },
+    "am": {
+        "title": "Super Mario Kart",
+        "system": "snes",
+        "chunks": 1
+    },
+    "an": {
+        "title": "Mario Kart: Super Circuit",
+        "system": "gba",
+        "chunks": 1
+    },
+    "ao": {
+        "title": "Mario Kart 64",
+        "system": "n64",
+        "chunks": 1
+    },
+    "ap": {
+        "title": "Mario Kart DS",
+        "system": "nds",
+        "chunks": 2
+    },
+    "aq": {
+        "title": "Grand Theft Auto",
+        "system": "psx",
+        "chunks": 24
+    },
+    "ar": {
+        "title": "Grand Theft Auto 2",
+        "system": "psx",
+        "chunks": 19
+    },
+    "as": {
+        "title": "Silent Hill",
+        "system": "psx",
+        "chunks": 16
+    },
+    "at": {
+        "title": "Doom",
+        "system": "psx",
+        "chunks": 10
+    },
+    "au": {
+        "title": "Final Doom",
+        "system": "psx",
+        "chunks": 8
+    },
+    "av": {
+        "title": "Doom 64",
+        "system": "n64",
+        "chunks": 1
+    },
+    "aw": {
+        "title": "Quake",
+        "system": "n64",
+        "chunks": 1
+    },
+    "ax": {
+        "title": "Quake II",
+        "system": "psx",
+        "chunks": 11
+    },
+    "ay": {
+        "title": "Wolfenstein 3D",
+        "system": "jaguar",
+        "chunks": 1
+    },
+    "az": {
+        "title": "Pokemon Blue Version",
+        "system": "gb",
+        "chunks": 1
+    },
+    "ba": {
+        "title": "Pokemon Red Version",
+        "system": "gb",
+        "chunks": 1
+    },
+    "bb": {
+        "title": "Pokemon Yellow Version",
+        "system": "gb",
+        "chunks": 1
+    },
+    "bc": {
+        "title": "Pokemon HeartGold Version",
+        "system": "nds",
+        "chunks": 7
+    },
+    "bd": {
+        "title": "Pokemon SoulSilver Version",
+        "system": "nds",
+        "chunks": 7
+    },
+    "be": {
+        "title": "Pokemon Emerald Version",
+        "system": "gba",
+        "chunks": 1
+    },
+    "bf": {
+        "title": "Super Mario Bros.",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bg": {
+        "title": "Super Mario Bros 2",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bh": {
+        "title": "Super Mario Bros 3",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bi": {
+        "title": "Super Mario World",
+        "system": "snes",
+        "chunks": 1
+    },
+    "bj": {
+        "title": "Super Mario World 2: Yoshi's Island",
+        "system": "snes",
+        "chunks": 1
+    },
+    "bk": {
+        "title": "Super Mario 64",
+        "system": "n64",
+        "chunks": 1
+    },
+    "bl": {
+        "title": "Super Ghouls 'n Ghosts",
+        "system": "snes",
+        "chunks": 1
+    },
+    "bm": {
+        "title": "The Legend of Zelda",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bn": {
+        "title": "Zelda II: The Adventure of Link",
+        "system": "nes",
+        "chunks": 1
+    },
+    "bo": {
+        "title": "The Legend of Zelda: A Link to the Past",
+        "system": "snes",
+        "chunks": 1
+    },
+    "bp": {
+        "title": "The Legend of Zelda: Link's Awakening",
+        "system": "gb",
+        "chunks": 1
+    },
+    "bq": {
+        "title": "The Legend of Zelda: Ocarina of Time",
+        "system": "n64",
+        "chunks": 2
+    },
+    "br": {
+        "title": "The Legend of Zelda: Majora's Mask",
+        "system": "n64",
+        "chunks": 2
+    },
+    "bs": {
+        "title": "WarioWare, Inc: Mega Microgame$!",
+        "system": "gba",
+        "chunks": 1
+    },
+    "bt": {
+        "title": "Crash Bandicoot",
+        "system": "psx",
+        "chunks": 24
+    },
+    "bu": {
+        "title": "Crash Bandicoot 2: Cortex Strikes Back",
+        "system": "psx",
+        "chunks": 5
+    },
+    "bv": {
+        "title": "Crash Bandicoot: Warped",
+        "system": "psx",
+        "chunks": 6
+    },
+    "bw": {
+        "title": "Paper Mario",
+        "system": "n64",
+        "chunks": 2
+    }
+}
