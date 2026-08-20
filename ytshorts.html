@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>YouTube Shorts Infinite Player</title>
+<style>
+  body, html {
+    margin:0;padding:0;height:100%;width:100%;overflow:hidden;
+  }
+
+  #top-controls {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0);
+    top: 10px;
+    z-index: 10;
+  }
+
+  #top-controls button {
+    margin: 0px 10px;
+    background-color: #555555;
+    color: white;
+    border-color: white;
+    font-family: 'Arial';
+    cursor: pointer;
+  }
+
+  #frame-player {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:none;
+    z-index: 1;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="top-controls">
+  <button onclick="document.getElementById('frame-player').contentWindow.location.reload();" id="reload">Reload</button>
+  <button id="change-key">Change key</button>
+</div>
+
+<iframe id="frame-player"></iframe>
+
+<script>
+  API_KEYS = [
+    "AIzaSyCVXzksvXxK2VoGmKH-zi8ctBWQjNEjgI8",
+    "AIzaSyC6W6McjLp22ajN4oP_NhxelQ6YbcROdiY",
+    "AIzaSyAxNd2pe9cs67iFALBUXq5p95ISy0wJedQ",
+    "AIzaSyAGVdK3kXEJMbRfBvT6TwoL893CCkbi4HU"  
+  ];
+  function createFrame(apiKey) {
+    let framePlayer = document.getElementById("frame-player");
+    framePlayer.srcdoc = `
+    <head>
+      <style>
+        body {
+          margin: 0;
+          background: black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          overflow: hidden;
+          user-select: none;
+        }
+        #previous-bar, #next-bar {
+          width: 25%;
+          height: 100%;
+          color: white;
+          font-size: 42px;
+          font-family: "Arial";
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+        #container {
+          width: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #player {
+          width: 360px;
+          height: 640px;
+        }
+        #no-videos, #no-player {
+          position: fixed;
+          bottom: 50%;
+          left: 50%;
+          transform: translate(-50%,0);
+          color: white;
+          font-size: 42px;
+          font-family: "Arial";
+          text-align: center;
+          display: none;
+        }
+      </style>
+      </head>
+      <body>
+      <div id="previous-bar" onclick="previousVideo()">Previous</div>
+      <div id="container">
+        <div id="player"><div id="no-player">Hit next --></div></div>
+        <div id="no-videos">No videos found. <br> Try reloading or switching API keys</div>
+      </div>
+      <div id="next-bar" onclick="nextVideo()">Next</div>
+      <script src="https://www.youtube.com/iframe_api"><\/script>
+      <script>
+      let player;
+      let shorts = [];
+      let shortsIndex = 0;
+      let played = new Set(); // keep track of videos already played
+      let nextPageToken = null;
+  
+
+      // ===== CONFIG =====
+      const API_KEY = "${apiKey}";
+      const MAX_RESULTS = 200;
+      const SEARCH_PHRASES = [
+        "gangstalking",
+        "liveleak",
+        "accident",
+        "MarilynMansionShow",
+        "cars",
+        "school",
+        "game",
+        "DharMann",
+        "balls",
+        "bug",
+        "men",
+        "happy",
+        "blue collar worker",
+        "try not to laugh",
+        "targeted individual",
+        "in public",,
+        "Siri",
+        "life hack",
+        "ringworm", 
+        "in Walmart", 
+        "chromebook",
+        "caught on camera",
+        "slide eater",
+        "crashout",
+        "Kirkified",
+        "gif",
+        "jumpscare",
+        "skinwalker",
+        "ylyl",
+        "challenge",
+        "fight",
+        "fight video",
+        "breaking bad",
+        "epstein",
+        "we are charlie kirk",
+        "frowncore",
+        "clickbait",
+        "tragedy",
+        "tragic",
+        "intense",
+        "warning",
+        "breaking",
+        "destruction",
+        "home video",
+        "fail",
+        "worst",
+        "awful",
+        "terrible",
+        "extreme",
+        "injured",
+        "deadly",
+        "upset",
+        "argument",
+        "music video",
+        "ishowspeed",
+        "cooked",
+        "💀",
+        "🥀",
+        "sybau",
+        "ytpmv",
+        "music video",
+        "meme",
+        "yapping"
+      ]
+
+      function generateQuery() {
+        let activePhrases = [...SEARCH_PHRASES];
+        let selectedIndex = Math.floor(Math.random() * activePhrases.length);
+        let fullQuery = activePhrases[selectedIndex];
+        activePhrases.splice(selectedIndex, 1);
+        for (i=0;i<3;i++) {
+          selectedIndex = Math.floor(Math.random() * activePhrases.length);
+          fullQuery = fullQuery + " " + activePhrases[selectedIndex];
+          activePhrases.splice(selectedIndex, 1);
+        }
+        console.log(fullQuery);
+        return(fullQuery);
+      }
+
+      async function fetchShorts() {
+        try {
+          document.getElementById("no-videos").style.display = "none";
+          const url = new URL("https:\/\/www.googleapis.com/youtube/v3/search");
+          url.searchParams.set("part", "snippet");
+          url.searchParams.set("type", "video");
+          url.searchParams.set("q", generateQuery());
+          url.searchParams.set("maxResults", MAX_RESULTS);
+          url.searchParams.set("videoDuration", "short"); 
+          if(nextPageToken) url.searchParams.set("pageToken", nextPageToken);
+          url.searchParams.set("key", API_KEY);
+
+          const res = await fetch(url);
+          const data = await res.json();
+          nextPageToken = data.nextPageToken;
+
+          // add new video IDs, filter out ones already played
+          const newShorts = data.items.map(item => item.id.videoId)
+                                      .filter(id => (!played.has(id) && !shorts.includes(id)));
+          shorts.push(...newShorts);
+
+          if(!player && shorts.length) loadPlayer();
+        } catch(err) {
+          console.error("Failed to fetch shorts:", err);
+          if(shorts.length === 0) {
+              document.getElementById("no-videos").style.display = "block";
+          };
+          if(!player) loadPlayer();
+        }
+      }
+
+      function loadPlayer() {
+        const nextId = getNextVideoId();
+        player = new YT.Player("player", {
+          videoId: nextId,
+          playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, playsinline: 1 },
+          events: { onStateChange: onPlayerStateChange }
+        });
+      }
+
+      function getNextVideoId() {
+        // if all have been played, reset
+        if(played.size >= shorts.length) played.clear();
+
+        let nextId = shorts[shortsIndex];
+        if (!played.has(nextId)) played.add(nextId);
+        shortsIndex++;
+        return nextId;
+      }
+
+      async function nextVideo() {
+        let nextId = getNextVideoId();
+        // pre-fetch more videos if close to end
+        if(shorts.length - played.size <= 2) {
+          for (let i=0;i<5;i++) {
+            await fetchShorts();
+          }
+        }
+        if(!player.loadVideoById) loadPlayer();
+        player.loadVideoById(nextId);
+      }
+
+      async function previousVideo() {
+        if (shorts.length > 2 && shortsIndex > 1) {
+          shortsIndex -= 2;
+          player.loadVideoById(shorts[shortsIndex]);
+          player.playVideo();
+          shortsIndex++;
+        }
+      }
+
+      function onPlayerStateChange(event) {
+        if(event.data === YT.PlayerState.ENDED) nextVideo();
+      }
+
+      window.addEventListener("DOMContentLoaded", async () => {
+        console.log("message received");
+        while (shorts == []) await fetchShorts;
+        if (!player) nextVideo();
+      });
+
+      setTimeout(() => {
+        document.getElementById("no-player").style.display = "block";
+      }, 2000);
+      <\/script>
+      </body>
+    `;
+  }
+  var activeKey = 0;
+  document.getElementById("change-key").addEventListener("click", () => {
+    if (activeKey < API_KEYS.length - 1) {
+      activeKey++;
+    } else {
+      activeKey = 0;
+    }
+    createFrame(API_KEYS[activeKey]);
+    });
+
+  createFrame(API_KEYS[0]);
+</script>
+
+
+
+</body>
+</html>

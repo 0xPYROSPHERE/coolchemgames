@@ -9,5 +9,3 @@ async function fetchSite() {
 
 const siteFrame = document.getElementById("site");
 fetchSite().then(data => {siteFrame.srcdoc = data;});
-const siteHtml = siteFrame.srcdoc;
-console.log(window.location.search);
