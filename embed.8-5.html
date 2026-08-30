@@ -122,7 +122,7 @@
                 color: yellow;
             }
 
-            #logo {
+            #logo img {
                 width: 240px;
                 height: 180px;
             }
@@ -176,9 +176,10 @@
             #favorites-empty {
                 display: none;
                 color: lightgrey;
-                font-size: 52px;
+                font-size: 38px;
                 font-family: "Sigmar";
                 text-align: center;
+                margin-top: 20px;
             }
 
             body.loading {
@@ -189,7 +190,7 @@
         <script>
             const CONTEXT = "sites";
             const GAMES = {
-                "myrustysubmarine": {
+                myrustysubmarine: {
                     name: "My Rusty Submarine",
                     image: "myrustysubmarine.jpg",
                     url: "myrustysubmarine.html",
@@ -454,7 +455,7 @@
                     url: "driftking.html",
                     categories: ["driving"]
                 },
-                "2048": {
+                game2048: {
                     name: "2048",
                     image: "2048.png",
                     url: "2048.html",
@@ -1053,7 +1054,9 @@
     <body>
         <div id="wrapper">
             <aside id="sidebar">
-                <img id="logo" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/logo.png">
+                <a id="logo" href="https://cdn.jsdelivr.net/gh/bb-901/quietclassroom@main/index.svg">
+                    <img src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@main/images/icons/logo.png">
+                </a>
                 <div id="sidebar-nav">
                     <li id="nav-share">Share</li>
                     <li id="nav-random">Random Game</li>
@@ -1084,7 +1087,8 @@
             
             <iframe id="suggestion-form" src="https://docs.google.com/forms/d/e/1FAIpQLSfKJVwz6ID4h4FsSEM0iTtlCqYPh6vZzWUlptiZmZAgRt0xkg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div id="share-page">
-                <img width="350" height="350" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@latest/images/icons/qr2.png">
+                <h1>tinyurl.com/yuwnz5zc</h1>
+                <img width="350" height="350" src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames@latest/images/icons/qr3.png">
             </div>
             <script>
                 function resolveLink(game) {
