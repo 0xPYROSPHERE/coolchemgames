@@ -1034,7 +1034,7 @@
             }
 
             function sendView(id) {
-                window.parent.gtag("event", "page_view", {
+                window.parent.gtag && window.parent.gtag("event", "page_view", {
                     page_title: GAMES[id].name,
                     page_location: "/" + id
                 });
