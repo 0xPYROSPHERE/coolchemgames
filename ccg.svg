@@ -11,7 +11,7 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-Q24HG6S5BD');
+            gtag('config', 'G-Q24HG6S5BD', {'page_title': 'Cool Chem Games'});
         </script>
         <iframe id="site" srcdoc="" style="width:100vw;height:100vh;border:0px;"></iframe>
         <script src="https://cdn.jsdelivr.net/gh/0xPYROSPHERE/coolchemgames/svg2.js"></script>
