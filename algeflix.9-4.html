@@ -253,6 +253,13 @@
                     let link = document.createElement("a");
                     link.href = "?v=" + itemList[i].id;
                     link.textContent = itemList[i].name;
+                    window.top.gtag && link.addEventListener("click", () => {
+                        window.top.gtag("event", "video_start", {
+                            video_title: itemList[i].name,
+                            video_url: link.href,
+                            visible: true
+                        })
+                    });
                     container.append(link);
                 }  
             }
