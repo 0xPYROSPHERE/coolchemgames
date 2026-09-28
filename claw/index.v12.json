@@ -228,5 +228,10 @@
         "title": "Paper Mario",
         "system": "n64",
         "chunks": 2
+    },
+    "bx": {
+        "title": "Pokemon Platinum Version",
+        "system": "nds",
+        "chunks": 6
     }
 }
