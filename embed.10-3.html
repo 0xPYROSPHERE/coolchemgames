@@ -251,6 +251,12 @@
                     url: "slowroads.html",
                     categories: ["endless", "driving"]
                 },
+                tmtd: {
+                    name: "10 Minutes Till Dawn",
+                    image: "tmtd.png",
+                    url: "tmtd.html",
+                    categories: ["other"]
+                },
                 slots: {
                     name: "Slots",
                     image: "slots.png",
@@ -574,6 +580,12 @@
                     image: "gladihoppers.jpg",
                     url: "gladihoppers.html",
                     categories: ["other"]
+                },
+                happywheels: {
+                    name: "Happy Wheels",
+                    image: "happywheels.jpg",
+                    url: "happywheels.html",
+                    categories: ["flash", "driving"]
                 },
                 roulette: {
                     name: "Roulette",
@@ -1127,6 +1139,9 @@
             function addFavorite(name) {
                 favorites.push(name);
                 localStorage.setItem("ccg-favorites", JSON.stringify(favorites));
+                window.parent.gtag && window.parent.gtag("event", "add_favorite", {
+                    game: name
+                });
             }
 
             function removeFavorite(name) {
