@@ -5566,8 +5566,11 @@ function _JS_Video_Create(url) {
             video.requestVideoFrameCallback(updateHiccupWorkaround);
         });
     }
-    video.src = str;
-    console.log("Test: " + str);
+    if (str.includes("FinalE.mp4")) {
+        video.src = URL.createObjectURL(window.finalEBlob);
+    } else {
+        video.src = str;
+    }
     video.muted = true;
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
